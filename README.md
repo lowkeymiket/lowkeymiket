@@ -18,7 +18,7 @@ IT Infrastructure & Microsoft 365 Lead with 15+ years of experience securing, mo
 - Big changes ship in waves. A four-tenant migration and a two-line registry fix get the same treatment: pilot, validate, expand.
 - I'd rather ship a small fix that works on hundreds of machines than a clever one that works on mine.
 - Technology serves the business: every recommendation weighs security, cost, user experience, and whether someone can still support it in three years.
-- If it isn't documented, it isn't done. Every script ships with comment-based help, because the next admin is usually future me.
+- Every script ships with comment-based help. Not because I love writing documentation, but because the next admin is usually future me, and future me always has questions.
 
 ## Toolbox
 
