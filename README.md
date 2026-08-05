@@ -13,7 +13,7 @@ IT Infrastructure & Microsoft 365 Lead with 15+ years of experience securing, mo
 
 ## How I work
 
-- I automate the boring stuff so I can be paranoid about the dangerous stuff. Anything destructive validates every target individually and waits for a human yes. Never a blind search-and-delete.
+- I automate the boring stuff so I can be paranoid about the dangerous stuff.
 - Scripts should be boring: single purpose, obvious SUCCESS/ERROR output, exit codes an RMM platform can parse, and safe to run twice.
 - Big changes ship in waves. A four-tenant migration and a two-line registry fix get the same treatment: pilot, validate, expand.
 - I'd rather ship a small fix that works on hundreds of machines than a clever one that works on mine.
