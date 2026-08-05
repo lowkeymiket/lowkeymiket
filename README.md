@@ -24,8 +24,7 @@ Windows Systems Administrator focused on Microsoft 365, Azure, and endpoint auto
 Most of my day-to-day work lives in private repositories, but I'm happy to walk through real examples in an interview.
 
 <!--
-TODO for Mike (these comments are invisible on the rendered page):
-- Add preferred contact info, e.g.: 📫 you@example.com · LinkedIn: linkedin.com/in/yourprofile
-- Add certifications if you have them (e.g. AZ-104, MS-102, MD-102)
-- Add years of experience / current title if you want it public
+Rule: no personal info on this page or anywhere on GitHub (no phone, emails,
+location, resume content). Contact details live on the resume only.
+Optional future addition: certifications (professional credentials only).
 -->
