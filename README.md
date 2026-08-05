@@ -1,13 +1,15 @@
 # Hi, I'm Mike 👋
 
-Windows Systems Administrator focused on Microsoft 365, Azure, and endpoint automation.
+IT Infrastructure & Microsoft 365 Lead with 15+ years of experience securing, modernizing, and consolidating technology environments across multiple companies.
 
 ## What I do
 
-- **Microsoft 365 administration:** Exchange Online, Outlook, OneNote, and Teams, including bulk mailbox operations driven by the Microsoft Graph API
-- **PowerShell automation:** silent, idempotent scripts built to deploy safely at fleet scale through RMM tooling
-- **Azure:** environment inventory, security posture review, and cost auditing
-- **Internal tooling:** small end-user utilities in C#/WinForms (self-service cache cleanup, technician-facing removal tools)
+- **Microsoft 365 administration**: Exchange Online, Teams, SharePoint, and OneDrive across multi-company environments, including bulk mailbox operations driven by the Microsoft Graph API
+- **Identity & security**: Entra ID, Conditional Access, passwordless authentication (FIDO2, Windows Hello for Business), RBAC, and risk-based controls
+- **Tenant consolidation**: technical project lead for consolidating four independent Microsoft 365 tenants into one (roughly 1,000 mailboxes, 650 OneDrive accounts, 300 SharePoint sites, and 200 managed devices)
+- **PowerShell automation**: 31 production scripts for administration, migration, reporting, and endpoint management, built to run silently and idempotently at fleet scale through RMM tooling
+- **Azure & endpoints**: VMs, networking, storage, backup, and monitoring, plus Intune device management from enrollment through compliance
+- **Internal tooling**: small end-user utilities in C#/WinForms (self-service cache cleanup, technician-facing removal tools)
 
 ## How I work
 
@@ -17,7 +19,7 @@ Windows Systems Administrator focused on Microsoft 365, Azure, and endpoint auto
 
 ## Toolbox
 
-`PowerShell 7` · `Microsoft Graph API` · `Microsoft 365` · `Azure` · `Windows 11` · `RMM platforms` · `C# / WinForms` · `Git & GitHub`
+`PowerShell 7` · `Microsoft Graph API` · `Microsoft 365` · `Entra ID` · `Intune` · `Azure` · `Conditional Access` · `Windows 11` · `RMM platforms` · `C# / WinForms` · `Git & GitHub`
 
 ---
 
@@ -25,6 +27,7 @@ Most of my day-to-day work lives in private repositories, but I'm happy to walk 
 
 <!--
 Rule: no personal info on this page or anywhere on GitHub (no phone, emails,
-location, resume content). Contact details live on the resume only.
+location, resume content, employer or tenant names). Contact details live on
+the resume only.
 Optional future addition: certifications (professional credentials only).
 -->
