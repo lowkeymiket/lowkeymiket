@@ -13,9 +13,12 @@ IT Infrastructure & Microsoft 365 Lead with 15+ years of experience securing, mo
 
 ## How I work
 
-- Safety first: destructive operations validate every target individually before acting, and a human approves the list. Never a blind search-and-delete.
-- Automation should be boring: single-purpose scripts with clear SUCCESS/ERROR output and exit codes an RMM platform can parse
-- Documentation lives with the code: every script ships with comment-based help
+- I automate the boring stuff so I can be paranoid about the dangerous stuff. Anything destructive validates every target individually and waits for a human yes. Never a blind search-and-delete.
+- Scripts should be boring: single purpose, obvious SUCCESS/ERROR output, exit codes an RMM platform can parse, and safe to run twice.
+- Big changes ship in waves. A four-tenant migration and a two-line registry fix get the same treatment: pilot, validate, expand.
+- I'd rather ship a small fix that works on hundreds of machines than a clever one that works on mine.
+- Technology serves the business: every recommendation weighs security, cost, user experience, and whether someone can still support it in three years.
+- If it isn't documented, it isn't done. Every script ships with comment-based help, because the next admin is usually future me.
 
 ## Toolbox
 
