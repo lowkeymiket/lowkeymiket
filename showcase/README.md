@@ -18,7 +18,6 @@ Large-scale engineering work: migration, identity, automation, and security arch
 | [Intune Enrollment Failure After Tenant Migration](02-intune-enrollment-after-migration.md) | Layer-by-layer diagnosis of devices that joined the new Entra tenant but silently failed MDM enrollment |
 | [Safe Tenant-Wide Exchange Calendar Cleanup](03-exchange-calendar-cleanup.md) | Destructive automation done safely: discover → export → human approval → controlled execution |
 | [SharePoint Stale "(Inactive)" Identity Cleanup](04-sharepoint-stale-identity-cleanup.md) | Site-level identity internals, PnP PowerShell, and the judgment to *not* bulk-delete 14,000+ stale entries |
-| [Salesforce SAML SSO with Microsoft Entra ID](05-salesforce-entra-saml-sso.md) | Full SAML authentication chain: federation IDs, certificates, user mapping, MFA, and assertion troubleshooting |
 | [Conditional Access Architecture & MFA Redesign](06-conditional-access-architecture.md) | Security design for a distributed workforce: dynamic groups, trusted locations, service-account exceptions, legacy auth lockdown |
 | [Cloud Infrastructure & File-Service Modernization](07-cloud-infrastructure-modernization.md) | Moving distributed on-prem offices (DCs, file/print, ESXi, FortiGate) toward a cloud-first architecture |
 
