@@ -4,7 +4,9 @@
 
 An organization-wide meeting was rescheduled by its external organizer, but the original invite remained on employee calendars across the tenant because the invite had reached most of the organization through **forwarding**, and forwarded copies never received the update.
 
-Rather than perform a broad search-and-delete, I designed a multi-stage PowerShell workflow with a **manual approval gate before any destructive operation**.
+This was not routine calendar hygiene. It was a deadline: the stale invites had to be removed **before employees started joining the company-wide call** based on the old, wrong meeting time.
+
+Rather than perform a broad search-and-delete under that pressure, I designed a multi-stage PowerShell workflow with a **manual approval gate before any destructive operation**.
 
 This is one of the strongest automation examples in this portfolio, not because of what the script could delete, but because of what it **refused to delete automatically**.
 
@@ -31,6 +33,10 @@ The organizer then **rescheduled** the meeting. That is where the failure mode l
 - Result: the direct recipient got the update, while the forwarded copies across the tenant kept the **original meeting at the original time**, with a live-looking Zoom link.
 
 Nothing was "broken" in Exchange. Every system behaved as designed. The design just left hundreds of calendars showing a meeting that no longer existed at that time.
+
+### The stakes
+
+Because this was a company-wide call, the failure mode was not "a stale entry on some calendars." It was hundreds of employees showing up to the wrong meeting time, missing the real one, and flooding IT with tickets in the process. The stale copies had to be gone **before the old time slot arrived**, which turned a calendar-data problem into a time-boxed production task.
 
 ## The cleanup problem
 
@@ -123,6 +129,8 @@ instead of:
 > "We just deleted the wrong meetings."
 
 That is a huge difference operationally.
+
+It mattered even more here because of the deadline. Time pressure is exactly when skipping the review step is most tempting, and exactly when a bad bulk delete does the most damage. The gate stayed in the workflow, and the deadline was still met.
 
 ## Reusable automation principle
 
