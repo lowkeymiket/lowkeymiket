@@ -14,7 +14,7 @@ This is not a catalog of every ticket solved. Each case here made the cut for on
 |---|---|
 | [Microsoft 365 Multi-Tenant Consolidation](01-m365-tenant-consolidation.md) | Consolidating three environments into one tenant (~1,050 users, 809 mailboxes, 76.6 TB of data) across identity, Exchange, SharePoint, OneDrive, Teams, and endpoints |
 | [Intune Enrollment Failure After Tenant Migration](02-intune-enrollment-after-migration.md) | Layer-by-layer diagnosis of devices that joined the new Entra tenant but silently failed MDM enrollment, ultimately traced to target-tenant Conditional Access policies blocking device registration |
-| [Safe Tenant-Wide Exchange Calendar Cleanup](03-exchange-calendar-cleanup.md) | Destructive automation done safely: discover → export → human approval → controlled execution |
+| [Safe Tenant-Wide Exchange Calendar Cleanup](03-exchange-calendar-cleanup.md) | Removing a stale forwarded meeting invite from calendars tenant-wide: discover → export → human approval → controlled execution |
 | [SharePoint Stale "(Inactive)" Identity Cleanup](04-sharepoint-stale-identity-cleanup.md) | Site-level identity internals, PnP PowerShell, and the judgment to *not* bulk-delete 14,000+ stale entries |
 | [Conditional Access Architecture & MFA Redesign](05-conditional-access-architecture.md) | Security design for a distributed workforce: dynamic groups as a security boundary, trusted locations, service-account exceptions, legacy auth lockdown |
 | [Windows Hello Failure After Tenant Migration](06-windows-hello-after-migration.md) | Working down the stack (tenant state, NGC, PIN, biometrics, hardware), treating each failed fix as evidence instead of repeating it |

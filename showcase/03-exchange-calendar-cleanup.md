@@ -2,15 +2,39 @@
 
 ## Executive summary
 
-A canceled externally organized meeting remained on internal employee calendars after normal Outlook cancellation behavior failed to remove forwarded copies.
+An organization-wide meeting was rescheduled by its external organizer, but the original invite remained on employee calendars across the tenant because the invite had reached most of the organization through **forwarding**, and forwarded copies never received the update.
 
 Rather than perform a broad search-and-delete, I designed a multi-stage PowerShell workflow with a **manual approval gate before any destructive operation**.
 
 This is one of the strongest automation examples in this portfolio, not because of what the script could delete, but because of what it **refused to delete automatically**.
 
-## The problem
+## How the problem was created
 
-The organization needed to remove a specific orphaned calendar object across many users' mailboxes. A simplistic approach might be:
+The meeting was a Zoom meeting organized externally, by a parent organization. It reached the tenant through a forwarding chain:
+
+```
+External organizer (parent organization)
+        |
+        |  Zoom meeting invite
+        v
+One internal employee
+        |
+        |  Forwarded to the wider organization
+        v
+Hundreds of internal calendars
+```
+
+The organizer then **rescheduled** the meeting. That is where the failure mode lives:
+
+- A reschedule or cancellation propagates to the recipients on the **organizer's attendee list**.
+- A forwarded invite creates a calendar copy for someone the organizer's system may not track as a direct attendee, especially across an organizational boundary.
+- Result: the direct recipient got the update, while the forwarded copies across the tenant kept the **original meeting at the original time**, with a live-looking Zoom link.
+
+Nothing was "broken" in Exchange. Every system behaved as designed. The design just left hundreds of calendars showing a meeting that no longer existed at that time.
+
+## The cleanup problem
+
+The organization needed to remove that specific stale calendar object across many users' mailboxes. A simplistic approach might be:
 
 ```powershell
 # BAD IDEA
