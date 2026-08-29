@@ -16,6 +16,8 @@ Employee Name (Inactive)
 
 even though the active Entra identity was healthy.
 
+The `(Inactive)` suffix is itself deliberate: it is part of an identity-lifecycle convention in this environment, where separated employees keep a renamed, tightly restricted account (the convention and the access tiers it drives are covered in the [Conditional Access case study](05-conditional-access-architecture.md)). The problem here was that SharePoint's cached copy of the display name **outlived the lifecycle state it described**: rehired employees still surfaced under their separated-era identity.
+
 ## Why Entra changes did not fix it
 
 SharePoint stores user information at the **site level**:
