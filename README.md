@@ -20,7 +20,7 @@ IT Infrastructure & Microsoft 365 Lead with 15+ years of experience securing, mo
 - Technology serves the business: every recommendation weighs security, cost, user experience, and whether someone can still support it in three years.
 - Every script ships with comment-based help. Not because I love writing documentation, but because the next admin is usually future me, and future me always has questions.
 
-## Case studies
+## Case studies 📖
 
 I keep a sanitized [**IT Engineering Showcase**](showcase/README.md) of deep-dive case studies from production work: the problems where judgment mattered, not just tooling. Highlights:
 
