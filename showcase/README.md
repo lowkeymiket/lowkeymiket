@@ -17,7 +17,7 @@ This is not a catalog of every ticket solved. Each case here made the cut for on
 | [Safe Tenant-Wide Exchange Calendar Cleanup](03-exchange-calendar-cleanup.md) | Removing a stale forwarded invite tenant-wide before employees joined a rescheduled company-wide call at the wrong time, without skipping the approval gate: discover → export → human approval → controlled execution |
 | [SharePoint Stale "(Inactive)" Identity Cleanup](04-sharepoint-stale-identity-cleanup.md) | Site-level identity internals, PnP PowerShell, and the judgment to *not* bulk-delete 14,000+ stale entries |
 | [Conditional Access Architecture & MFA Redesign](05-conditional-access-architecture.md) | Security design for a distributed workforce: dynamic groups as a security boundary, trusted locations, service-account exceptions, legacy auth lockdown |
-| [Windows Hello Failure After Tenant Migration](06-windows-hello-after-migration.md) | Working down the stack (tenant state, NGC, PIN, biometrics, hardware) until an unrelated settings toggle re-initialized the biometric stack, exposing stale per-identity state as the real fault |
+| [Windows Hello Failure After Tenant Migration](06-windows-hello-after-migration.md) | Working down the stack (tenant state, NGC, PIN, biometrics) until an unrelated settings toggle re-initialized the biometric stack, exposing stale per-identity state as the real fault |
 
 ---
 
