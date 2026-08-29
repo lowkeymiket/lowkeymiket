@@ -2,7 +2,7 @@
 
 ## Executive summary
 
-Designed and modified Microsoft Entra Conditional Access behavior across a distributed workforce.
+This case study covers the design and modification of Microsoft Entra Conditional Access behavior across a distributed workforce.
 
 The goal was not merely "turn MFA on." The actual challenge was enforcing the correct authentication posture while accounting for employees, service accounts, remote work, trusted offices, geographic restrictions, legacy authentication, and specialized workflows.
 
@@ -22,7 +22,7 @@ user.displayName        not contain "(Inactive)"
 user.displayName        not contain "(Bypass)"
 ```
 
-Each condition earns its place:
+What each condition excludes:
 
 | Condition | What it excludes |
 |---|---|
@@ -32,7 +32,7 @@ Each condition earns its place:
 | No `(Inactive)` in display name | Separated employees |
 | No `(Bypass)` in display name | Special-purpose access accounts (below) |
 
-Nobody adds users to this group. Identity lifecycle data **is** the membership: hire someone and populate their attributes correctly, and they fall into the employee security posture automatically. The same is true in reverse, which is where the design gets interesting.
+Nobody adds users to this group. Identity lifecycle data **is** the membership: hire someone and populate their attributes correctly, and they fall into the employee security posture automatically. The same mechanism works in reverse, which is what drives the offboarding model below.
 
 ## Access tiers driven by lifecycle convention
 

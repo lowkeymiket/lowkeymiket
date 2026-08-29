@@ -2,7 +2,7 @@
 
 ## Executive summary
 
-Served as a core engineer on a major Microsoft 365 consolidation combining three separate environments into a common tenant.
+A Microsoft 365 consolidation combined three separate environments into a common tenant. This case study covers the engineering work behind it: identity mapping, migration tooling, device transitions, and workload validation.
 
 The migration inventory included approximately:
 

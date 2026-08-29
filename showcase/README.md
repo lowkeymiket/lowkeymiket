@@ -2,7 +2,7 @@
 
 Deep-dive case studies from production work across Microsoft 365 engineering, identity, cloud migration, endpoint management, automation, and security.
 
-This is not a catalog of every ticket solved. Each case here made the cut for one reason: it's a problem where **judgment mattered**: an unusual failure mode, a destructive operation that had to be engineered safely, or a design decision with real security consequences. Routine troubleshooting doesn't appear on this page.
+This is not a catalog of every ticket solved. Each case documents a problem where the interesting part is the reasoning: an unusual failure mode, a destructive operation that had to be engineered safely, or a design decision with real security consequences. Routine troubleshooting is not documented here.
 
 > **Sanitization note:** All case studies are sanitized. Employee names, company domains, tenant IDs, internal URLs, GUIDs (other than public Microsoft service-plan IDs), certificates, and secrets have been replaced with placeholders such as `example.com`. The problems, methods, and outcomes are real.
 
@@ -23,11 +23,9 @@ This is not a catalog of every ticket solved. Each case here made the cut for on
 
 ## The common thread
 
-The theme of this portfolio is not "I know a lot of Microsoft products." It is:
+None of these cases is really about a specific product. Each one crosses boundaries between identity, endpoints, Microsoft 365, SaaS applications, Windows, and automation, and the work in each was the same: determine which layer is actually failing, build a controlled fix, validate it at small scale, and only then expand the change.
 
-> I can take ownership of a production problem even when it crosses identity, endpoints, Microsoft 365, SaaS applications, Windows, networking, and automation. I determine which layer is actually failing, build a controlled fix, validate it at small scale, and only then expand the change.
-
-The same loop shows up in every case study:
+The same loop appears in every case study:
 
 ```
 Reproduce

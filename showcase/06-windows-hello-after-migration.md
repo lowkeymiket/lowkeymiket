@@ -74,7 +74,7 @@ Microsoft does not document the toggle's internals, so this is an evidence-based
 
 In effect, the toggle acted as an accidental **reset button for the biometric stack**: the one remaining suspect layer, reset by a setting whose documented purpose is something else entirely.
 
-The causal isolation here is unusually clean. Because no external hardware was ever connected, the toggle flip was the **only variable that changed** between a failing enrollment and a successful one on the same camera, the same drivers, and the same user.
+Because no external hardware was ever connected, the toggle flip was the **only variable that changed** between a failing enrollment and a successful one on the same camera, the same drivers, and the same user.
 
 This also settles the root cause. The fault was never the camera hardware, and the proof is that the **same built-in webcam enrolled successfully** the moment the surrounding state was rebuilt. The real fault was per-identity biometric state orphaned by the tenant migration, the same class of problem as the [Intune enrollment failure](02-intune-enrollment-after-migration.md): every component individually healthy, with the breakage living in state left behind between them.
 
@@ -92,9 +92,9 @@ Biometric Stack
 Hardware
 ```
 
-## What made this good troubleshooting
+## The troubleshooting principle
 
-A common mistake looks like this:
+A common failure pattern in biometric troubleshooting looks like this:
 
 ```
 NGC reset didn't work

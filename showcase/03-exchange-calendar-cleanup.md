@@ -6,9 +6,9 @@ An organization-wide meeting was rescheduled by its external organizer, but the 
 
 This was not routine calendar hygiene. It was a deadline: the stale invites had to be removed **before employees started joining the company-wide call** based on the old, wrong meeting time.
 
-Rather than perform a broad search-and-delete under that pressure, I designed a multi-stage PowerShell workflow with a **manual approval gate before any destructive operation**. The cleanup completed roughly two minutes before the stale invite's start time, with the invites successfully removed org-wide.
+Rather than perform a broad search-and-delete under that pressure, the response was a multi-stage PowerShell workflow with a **manual approval gate before any destructive operation**. The cleanup completed roughly two minutes before the stale invite's start time, with the invites successfully removed org-wide.
 
-This is one of the strongest automation examples in this portfolio, not because of what the script could delete, but because of what it **refused to delete automatically**.
+The defining feature of the workflow was not what it could delete. It was what it **refused to delete automatically**.
 
 ## How the problem was created
 
@@ -128,7 +128,7 @@ instead of:
 
 > "We just deleted the wrong meetings."
 
-That is a huge difference operationally.
+Operationally, those are very different failures. One is caught in review; the other is an incident.
 
 It mattered even more here because of the deadline. Time pressure is exactly when skipping the review step is most tempting, and exactly when a bad bulk delete does the most damage. The gate stayed in the workflow even with the clock running.
 
@@ -140,7 +140,7 @@ The cleanup completed roughly **two minutes before the stale invite's scheduled 
 - Employees joined the correct, rescheduled call instead of a dead meeting slot.
 - No collateral deletions: everything removed had been individually matched on multiple identifiers and explicitly approved.
 
-Two minutes of margin is not a comfortable win, and that is part of the point. The safety workflow did not cost the deadline. It ran inside it.
+Two minutes is a thin margin, but it demonstrates the relevant trade-off: the review gate ran inside the deadline rather than costing it. Safety and speed were not in conflict here; they were sequenced.
 
 ## Reusable automation principle
 
