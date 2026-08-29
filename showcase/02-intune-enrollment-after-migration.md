@@ -6,6 +6,8 @@ After a Windows endpoint migration, devices could appear to be successfully join
 
 This incident became a deeper investigation into the distinction between **identity registration** and **device management enrollment**: two things that look like one checkbox from the portal, but are entirely separate machine states.
 
+The root cause turned out to live in none of the obvious suspects. Not Windows, not the user, not the migration tooling. **Conditional Access policies in the target tenant were blocking the migrated devices from registering with MDM.**
+
 ## Symptom
 
 At first glance the migrated machine looked successful:
@@ -110,6 +112,30 @@ Quest state          Quest state
 
 Comparing against a known-good peer is often much faster than trying to reconstruct "normal" from documentation.
 
+## Root cause: Conditional Access
+
+The layered elimination kept pointing away from the device itself. Entra join was healthy, the user was eligible, and Windows showed no evidence of a completed enrollment attempt. The missing piece was in the target tenant's access policy layer: **Conditional Access was blocking the MDM registration flow for the migrated devices.**
+
+This is a trap built directly into the migration scenario. A freshly migrated endpoint arrives in the target tenant with no Intune enrollment and no compliance state. Any policy that gates access on device state can then lock the device out of the very enrollment that would satisfy the policy:
+
+```
+CA policy blocks the enrollment flow
+        |
+Device cannot register with MDM
+        |
+Device never becomes managed/compliant
+        |
+CA policy keeps blocking it
+```
+
+Nothing in this loop throws a visible error on the endpoint. The device simply never becomes managed, while every individual component reports itself healthy.
+
+## Resolution
+
+The blocking Conditional Access policies were adjusted so the Intune enrollment flow was not caught by the blocking conditions for migrating devices. Once the policy path was clear, the migrated endpoints completed MDM registration, and management state was validated per device (EnterpriseMgmt tasks present, MDM URLs populated, device object in Intune).
+
+The interplay between policy scoping and exceptions like this is the subject of its own case study: [Conditional Access Architecture and MFA Redesign](05-conditional-access-architecture.md).
+
 ## Core lesson
 
 ```
@@ -122,7 +148,7 @@ does **not** mean
 Intune enrollment succeeded
 ```
 
-These must be validated independently.
+These must be validated independently. And when every component on the device reports healthy, look up a layer: the tenant's own access policies can silently veto enrollment.
 
 ## Reusable diagnostic flow
 
@@ -144,8 +170,11 @@ These must be validated independently.
 8. Compare known-good endpoint
         |
 9. Inspect migration-tool state
+        |
+10. Review target-tenant Conditional Access
+    against the enrollment flow
 ```
 
 ## Technologies
 
-Microsoft Intune · Microsoft Entra ID · Windows 11 · Quest ODM / Device Migration · PowerShell · `dsregcmd` · Windows Task Scheduler · Event Viewer
+Microsoft Intune · Microsoft Entra ID · Conditional Access · Windows 11 · Quest ODM / Device Migration · PowerShell · `dsregcmd` · Windows Task Scheduler · Event Viewer
