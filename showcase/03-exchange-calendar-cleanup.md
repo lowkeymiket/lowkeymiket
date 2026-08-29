@@ -6,7 +6,7 @@ An organization-wide meeting was rescheduled by its external organizer, but the 
 
 This was not routine calendar hygiene. It was a deadline: the stale invites had to be removed **before employees started joining the company-wide call** based on the old, wrong meeting time.
 
-Rather than perform a broad search-and-delete under that pressure, I designed a multi-stage PowerShell workflow with a **manual approval gate before any destructive operation**.
+Rather than perform a broad search-and-delete under that pressure, I designed a multi-stage PowerShell workflow with a **manual approval gate before any destructive operation**. The cleanup completed roughly two minutes before the stale invite's start time, with the invites successfully removed org-wide.
 
 This is one of the strongest automation examples in this portfolio, not because of what the script could delete, but because of what it **refused to delete automatically**.
 
@@ -130,7 +130,17 @@ instead of:
 
 That is a huge difference operationally.
 
-It mattered even more here because of the deadline. Time pressure is exactly when skipping the review step is most tempting, and exactly when a bad bulk delete does the most damage. The gate stayed in the workflow, and the deadline was still met.
+It mattered even more here because of the deadline. Time pressure is exactly when skipping the review step is most tempting, and exactly when a bad bulk delete does the most damage. The gate stayed in the workflow even with the clock running.
+
+## Outcome
+
+The cleanup completed roughly **two minutes before the stale invite's scheduled start time**.
+
+- The stale invites were removed org-wide.
+- Employees joined the correct, rescheduled call instead of a dead meeting slot.
+- No collateral deletions: everything removed had been individually matched on multiple identifiers and explicitly approved.
+
+Two minutes of margin is not a comfortable win, and that is part of the point. The safety workflow did not cost the deadline. It ran inside it.
 
 ## Reusable automation principle
 
