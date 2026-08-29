@@ -6,7 +6,7 @@ Windows Hello Face failed to enroll on a device that had recently transitioned b
 
 Several reasonable identity and credential fixes failed. Instead of repeating them indefinitely, the investigation moved **down the stack**, using alternate biometric hardware to demonstrate that the general Windows Hello identity configuration was functional and isolate the fault to the biometric layer.
 
-The final fix was unexpected: enabling the Windows setting that allows Windows Hello to use an **external camera or fingerprint sensor**. Flipping that toggle re-initialized the biometric stack, and Windows Hello Face enrollment then completed. The toggle's documented purpose had nothing to do with the problem. What mattered was the side effect.
+The final fix was unexpected: enabling the Windows setting that allows Windows Hello to use an **external camera or fingerprint sensor**. Flipping that toggle re-initialized the biometric stack, and Windows Hello Face enrollment then completed **on the built-in camera that had been failing all along**. The toggle's documented purpose had nothing to do with the problem. What mattered was the side effect.
 
 ## Initial theory
 
@@ -59,7 +59,7 @@ Settings > Accounts > Sign-in options
     "Sign in with an external camera or fingerprint reader"
 ```
 
-After that toggle was enabled, Windows Hello Face **enrollment completed**. The toggle exists to control external biometric devices, yet flipping it resolved a failure it was never designed to fix.
+After that toggle was enabled, Windows Hello Face **enrollment completed on the built-in webcam**, the same sensor that had failed every previous attempt. The toggle exists to control external biometric devices, yet flipping it fixed the internal one.
 
 ## Why a toggle fixed a biometric failure
 
@@ -72,7 +72,7 @@ Microsoft does not document the toggle's internals, so this is an evidence-based
 
 In effect, the toggle acted as an accidental **reset button for the biometric stack**: the one remaining suspect layer, reset by a setting whose documented purpose is something else entirely.
 
-This also reframes the root cause. The fault was never the camera hardware. It was per-identity biometric state orphaned by the tenant migration, the same class of problem as the [Intune enrollment failure](02-intune-enrollment-after-migration.md): every component individually healthy, with the breakage living in state left behind between them.
+This also settles the root cause. The fault was never the camera hardware, and the proof is that the **same built-in webcam enrolled successfully** the moment the surrounding state was rebuilt. The real fault was per-identity biometric state orphaned by the tenant migration, the same class of problem as the [Intune enrollment failure](02-intune-enrollment-after-migration.md): every component individually healthy, with the breakage living in state left behind between them.
 
 ## Diagnostic progression
 
