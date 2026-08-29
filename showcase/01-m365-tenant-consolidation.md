@@ -140,7 +140,7 @@ Old SharePoint URL
 Target SharePoint URL
 ```
 
-Any documents, links, bookmarks, workflows, or references pointing to the original URL may need correction — significant when hundreds of SharePoint sites and OneDrives are involved.
+Any documents, links, bookmarks, workflows, or references pointing to the original URL may need correction, which becomes significant when hundreds of SharePoint sites and OneDrives are involved.
 
 ## Validation
 

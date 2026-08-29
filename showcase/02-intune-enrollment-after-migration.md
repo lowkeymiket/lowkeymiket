@@ -4,7 +4,7 @@
 
 After a Windows endpoint migration, devices could appear to be successfully joined to the destination Microsoft Entra tenant while still being **completely unmanaged** by the destination Intune environment.
 
-This incident became a deeper investigation into the distinction between **identity registration** and **device management enrollment** — two things that look like one checkbox from the portal, but are entirely separate machine states.
+This incident became a deeper investigation into the distinction between **identity registration** and **device management enrollment**: two things that look like one checkbox from the portal, but are entirely separate machine states.
 
 ## Symptom
 
@@ -50,7 +50,7 @@ But IT no longer controls:
 
 First, verify the machine actually belongs to the destination tenant. `dsregcmd /status` provides join state, tenant information, device identity, the Primary Refresh Token, and MDM discovery values.
 
-The Entra portion appeared healthy — which immediately narrowed the problem.
+The Entra portion appeared healthy, which immediately narrowed the problem.
 
 ### Layer 2: User eligibility
 
@@ -68,7 +68,7 @@ Get-ScheduledTask |
     Select-Object TaskName, TaskPath, State
 ```
 
-The expected destination enrollment structure was **missing** — a much stronger indicator than anything visible on the Entra device object.
+The expected destination enrollment structure was **missing**, a much stronger indicator than anything visible on the Entra device object.
 
 ### Layer 4: Event logs
 

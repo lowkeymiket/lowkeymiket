@@ -4,7 +4,7 @@
 
 Rehired and previously disabled employees could remain cached inside SharePoint as stale "(Inactive)" identities even though their current Microsoft Entra account was correct.
 
-Fixing it required going *beneath* Entra and the Microsoft 365 admin portals into SharePoint's own site-level user information. The investigation also surfaced **thousands** of inactive-looking entries tenant-wide — creating a second, more important challenge: recognizing that large-scale discovery did **not** justify large-scale deletion.
+Fixing it required going *beneath* Entra and the Microsoft 365 admin portals into SharePoint's own site-level user information. The investigation also surfaced **thousands** of inactive-looking entries tenant-wide, creating a second, more important challenge: recognizing that large-scale discovery did **not** justify large-scale deletion.
 
 ## Symptom
 

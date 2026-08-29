@@ -22,12 +22,12 @@ IT Infrastructure & Microsoft 365 Lead with 15+ years of experience securing, mo
 
 ## Case studies
 
-I keep a sanitized [**IT Engineering Showcase**](showcase/README.md) of deep-dive case studies from production work — the problems where judgment mattered, not just tooling. Highlights:
+I keep a sanitized [**IT Engineering Showcase**](showcase/README.md) of deep-dive case studies from production work: the problems where judgment mattered, not just tooling. Highlights:
 
-- [Microsoft 365 multi-tenant consolidation](showcase/01-m365-tenant-consolidation.md) — three environments into one tenant: ~1,050 users, 809 mailboxes, 76.6 TB of data
-- [Intune enrollment failure after tenant migration](showcase/02-intune-enrollment-after-migration.md) — devices that joined the new tenant but silently escaped management
-- [Safe tenant-wide Exchange calendar cleanup](showcase/03-exchange-calendar-cleanup.md) — destructive automation with a human approval gate
-- [SharePoint stale identity cleanup](showcase/04-sharepoint-stale-identity-cleanup.md) — why finding 14,000 stale entries is not permission to delete them
+- [Microsoft 365 multi-tenant consolidation](showcase/01-m365-tenant-consolidation.md): three environments into one tenant (~1,050 users, 809 mailboxes, 76.6 TB of data)
+- [Intune enrollment failure after tenant migration](showcase/02-intune-enrollment-after-migration.md): devices that joined the new tenant but silently escaped management
+- [Safe tenant-wide Exchange calendar cleanup](showcase/03-exchange-calendar-cleanup.md): destructive automation with a human approval gate
+- [SharePoint stale identity cleanup](showcase/04-sharepoint-stale-identity-cleanup.md): why finding 14,000 stale entries is not permission to delete them
 
 ## Toolbox
 
@@ -35,7 +35,7 @@ I keep a sanitized [**IT Engineering Showcase**](showcase/README.md) of deep-div
 
 ---
 
-Most of my day-to-day work lives in private repositories — the [showcase](showcase/README.md) covers the interesting parts in sanitized form, and I'm happy to walk through real examples in an interview.
+Most of my day-to-day work lives in private repositories. The [showcase](showcase/README.md) covers the interesting parts in sanitized form, and I'm happy to walk through real examples in an interview.
 
 <!--
 Rule: no personal info on this page or anywhere on GitHub (no phone, emails,

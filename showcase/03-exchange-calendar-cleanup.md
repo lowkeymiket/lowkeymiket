@@ -6,7 +6,7 @@ A canceled externally organized meeting remained on internal employee calendars 
 
 Rather than perform a broad search-and-delete, I designed a multi-stage PowerShell workflow with a **manual approval gate before any destructive operation**.
 
-This is one of the strongest automation examples in this portfolio — not because of what the script could delete, but because of what it **refused to delete automatically**.
+This is one of the strongest automation examples in this portfolio, not because of what the script could delete, but because of what it **refused to delete automatically**.
 
 ## The problem
 
@@ -23,7 +23,7 @@ That is unsafe. Meeting subjects are not unique.
 
 ## Identification strategy
 
-The target event was identified using several properties **together** — sender/organizer, subject, start time, end time, and the ICS/iCalendar UID:
+The target event was identified using several properties **together**: sender/organizer, subject, start time, end time, and the ICS/iCalendar UID.
 
 ```powershell
 $Matches = $CalendarItems | Where-Object {
@@ -49,13 +49,13 @@ $Matches |
 
 ## Phase 2: Approval
 
-A human could inspect every candidate record —
+A human could inspect every candidate record:
 
 ```
 Mailbox | Sender | Subject | Start | End | ICalUid | Approved
 ```
 
-— and explicitly approve the target objects.
+Only explicitly approved rows moved forward.
 
 ## Phase 3: Controlled execution
 

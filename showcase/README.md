@@ -2,7 +2,7 @@
 
 Deep-dive case studies from production work across Microsoft 365 engineering, identity, cloud migration, endpoint management, automation, and security.
 
-This is not a catalog of every ticket solved. Each case here made the cut for one reason: it's a problem where **judgment mattered** — an unusual failure mode, a destructive operation that had to be engineered safely, or a design decision with real security consequences. Routine troubleshooting doesn't appear on this page.
+This is not a catalog of every ticket solved. Each case here made the cut for one reason: it's a problem where **judgment mattered**: an unusual failure mode, a destructive operation that had to be engineered safely, or a design decision with real security consequences. Routine troubleshooting doesn't appear on this page.
 
 > **Sanitization note:** All case studies are sanitized. Employee names, company domains, tenant IDs, internal URLs, GUIDs (other than public Microsoft service-plan IDs), certificates, and secrets have been replaced with placeholders such as `example.com`. The problems, methods, and outcomes are real.
 
@@ -12,12 +12,12 @@ This is not a catalog of every ticket solved. Each case here made the cut for on
 
 | Case study | What it demonstrates |
 |---|---|
-| [Microsoft 365 Multi-Tenant Consolidation](01-m365-tenant-consolidation.md) | Consolidating three environments into one tenant — ~1,050 users, 809 mailboxes, 76.6 TB of data — across identity, Exchange, SharePoint, OneDrive, Teams, and endpoints |
-| [Intune Enrollment Failure After Tenant Migration](02-intune-enrollment-after-migration.md) | Layer-by-layer diagnosis of devices that joined the new Entra tenant but silently failed MDM enrollment — a partially successful migration nobody notices until it matters |
+| [Microsoft 365 Multi-Tenant Consolidation](01-m365-tenant-consolidation.md) | Consolidating three environments into one tenant (~1,050 users, 809 mailboxes, 76.6 TB of data) across identity, Exchange, SharePoint, OneDrive, Teams, and endpoints |
+| [Intune Enrollment Failure After Tenant Migration](02-intune-enrollment-after-migration.md) | Layer-by-layer diagnosis of devices that joined the new Entra tenant but silently failed MDM enrollment: a partially successful migration nobody notices until it matters |
 | [Safe Tenant-Wide Exchange Calendar Cleanup](03-exchange-calendar-cleanup.md) | Destructive automation done safely: discover → export → human approval → controlled execution |
 | [SharePoint Stale "(Inactive)" Identity Cleanup](04-sharepoint-stale-identity-cleanup.md) | Site-level identity internals, PnP PowerShell, and the judgment to *not* bulk-delete 14,000+ stale entries |
 | [Conditional Access Architecture & MFA Redesign](05-conditional-access-architecture.md) | Security design for a distributed workforce: dynamic groups as a security boundary, trusted locations, service-account exceptions, legacy auth lockdown |
-| [Windows Hello Failure After Tenant Migration](06-windows-hello-after-migration.md) | Working down the stack — tenant state, NGC, PIN, biometrics, hardware — treating each failed fix as evidence instead of repeating it |
+| [Windows Hello Failure After Tenant Migration](06-windows-hello-after-migration.md) | Working down the stack (tenant state, NGC, PIN, biometrics, hardware), treating each failed fix as evidence instead of repeating it |
 
 ---
 

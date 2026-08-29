@@ -4,7 +4,7 @@
 
 Windows Hello Face failed to enroll on a device that had recently transitioned between Microsoft Entra tenants.
 
-Several reasonable identity and credential fixes failed. Instead of repeating them indefinitely, the investigation moved **down the stack** until alternate biometric hardware demonstrated that the general Windows Hello identity configuration was functional — isolating the fault to the original biometric path.
+Several reasonable identity and credential fixes failed. Instead of repeating them indefinitely, the investigation moved **down the stack** until alternate biometric hardware demonstrated that the general Windows Hello identity configuration was functional, isolating the fault to the original biometric path.
 
 ## Initial theory
 

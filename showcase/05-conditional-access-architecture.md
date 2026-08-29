@@ -93,7 +93,7 @@ because something might need it
 
 ## Result
 
-MFA enforcement became consistent and aligned with the intended location model, while service workflows and justified legacy exceptions kept working — deliberately, narrowly, and documented.
+MFA enforcement became consistent and aligned with the intended location model, while service workflows and justified legacy exceptions kept working: deliberately, narrowly, and documented.
 
 ## Technologies
 
