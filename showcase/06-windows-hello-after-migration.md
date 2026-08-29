@@ -4,7 +4,9 @@
 
 Windows Hello Face failed to enroll on a device that had recently transitioned between Microsoft Entra tenants.
 
-Several reasonable identity and credential fixes failed. Instead of repeating them indefinitely, the investigation moved **down the stack** until alternate biometric hardware demonstrated that the general Windows Hello identity configuration was functional, isolating the fault to the original biometric path.
+Several reasonable identity and credential fixes failed. Instead of repeating them indefinitely, the investigation moved **down the stack**, using alternate biometric hardware to demonstrate that the general Windows Hello identity configuration was functional and isolate the fault to the biometric layer.
+
+The final fix was unexpected: enabling the Windows setting that allows Windows Hello to use an **external camera or fingerprint sensor**. Flipping that toggle re-initialized the biometric stack, and Windows Hello Face enrollment then completed. The toggle's documented purpose had nothing to do with the problem. What mattered was the side effect.
 
 ## Initial theory
 
@@ -48,6 +50,30 @@ Alternate biometric hardware was introduced. Windows Hello provisioning **succee
 
 That changed the diagnosis: the general identity and Hello stack could clearly complete enrollment. The remaining problem was much more likely tied to the original device's biometric path.
 
+## Resolution: a settings toggle
+
+Testing external hardware required enabling a Windows setting:
+
+```
+Settings > Accounts > Sign-in options
+    "Sign in with an external camera or fingerprint reader"
+```
+
+After that toggle was enabled, Windows Hello Face **enrollment completed**. The toggle exists to control external biometric devices, yet flipping it resolved a failure it was never designed to fix.
+
+## Why a toggle fixed a biometric failure
+
+Microsoft does not document the toggle's internals, so this is an evidence-based hypothesis rather than a verified mechanism. But the evidence lines up well:
+
+1. Windows Hello biometrics run through the **Windows Biometric Framework** (the Windows Biometric Service), which keeps its own sensor configuration and per-sensor template databases. This layer sits below NGC, the PIN, and the Entra join, and none of the earlier resets touch it.
+2. That is consistent with what the investigation found in Layer 4: expected **BioEnrollment / WinBioDatabase state was absent** on this device.
+3. Biometric configuration is bound to the **user's identity**. This device had crossed Entra tenants, giving the user a new identity while the biometric layer retained state associated with the old one. The face enrollment path was stuck referencing stale per-identity state.
+4. The external-sensor toggle changes which **sensor pool** Windows Hello may use. Flipping it forces the biometric service to re-enumerate biometric units and rebuild its sensor configuration, recreating the missing database state fresh. The re-enumeration can also make the camera driver reinitialize, which is why the fix looked like a driver or firmware event from the outside.
+
+In effect, the toggle acted as an accidental **reset button for the biometric stack**: the one remaining suspect layer, reset by a setting whose documented purpose is something else entirely.
+
+This also reframes the root cause. The fault was never the camera hardware. It was per-identity biometric state orphaned by the tenant migration, the same class of problem as the [Intune enrollment failure](02-intune-enrollment-after-migration.md): every component individually healthy, with the breakage living in state left behind between them.
+
 ## Diagnostic progression
 
 ```
@@ -86,4 +112,4 @@ Each failed fix was treated as *evidence* that narrowed the search, not as an in
 
 ## Technologies
 
-Windows 11 · Windows Hello for Business · Microsoft Entra ID · NGC · Windows Biometric Framework · device migration
+Windows 11 · Windows Hello for Business · Microsoft Entra ID · NGC · Windows Biometric Framework · Windows Biometric Service · device migration
