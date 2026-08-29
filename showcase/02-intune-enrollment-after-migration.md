@@ -132,7 +132,11 @@ Nothing in this loop throws a visible error on the endpoint. The device simply n
 
 ## Resolution
 
-The blocking Conditional Access policies were adjusted so the Intune enrollment flow was not caught by the blocking conditions for migrating devices. Once the policy path was clear, the migrated endpoints completed MDM registration, and management state was validated per device (EnterpriseMgmt tasks present, MDM URLs populated, device object in Intune).
+The fix came down to one specific object: the **Microsoft Intune Enrollment** cloud app.
+
+Conditional Access scopes policies by cloud app, and MDM enrollment presents as its own cloud app, distinct from "Microsoft Intune" itself. The blocking policy's app scoping did not account for it, so enrollment traffic from the migrated devices was evaluated and blocked like any other sign-in. Including the Intune Enrollment cloud app in the policy configuration cleared the path for MDM registration.
+
+Once the policy change was in place, the migrated endpoints completed MDM registration, and management state was validated per device (EnterpriseMgmt tasks present, MDM URLs populated, device object in Intune).
 
 The interplay between policy scoping and exceptions like this is the subject of its own case study: [Conditional Access Architecture and MFA Redesign](05-conditional-access-architecture.md).
 
