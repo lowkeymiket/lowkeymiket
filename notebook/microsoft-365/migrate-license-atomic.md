@@ -23,7 +23,7 @@ The original production code has been modified to run read-only for this public 
 ## Script
 
 ```powershell
-<# Public reconstruction of an operational pattern used to move users between M365 SKUs.
+<# Public version of an operational pattern used to move users between M365 SKUs.
    Adds the destination license first, verifies assignment, then removes the source license. #>
 param(
     [Parameter(Mandatory)] [string]$CsvPath,

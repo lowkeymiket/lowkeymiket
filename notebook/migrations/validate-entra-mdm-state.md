@@ -6,11 +6,11 @@ During tenant-consolidation testing, a workstation could be successfully joined 
 
 ## Investigation
 
-We used `dsregcmd /status` and the Entra/Intune management portals to separate device-registration state from MDM enrollment state. Recovered evidence shows a migrated workstation reporting `AzureAdJoined : YES` and `DeviceAuthStatus : SUCCESS`, while separate Intune configuration work was still required.
+We used `dsregcmd /status` and the Entra/Intune management portals to separate device-registration state from MDM enrollment state. In testing, a migrated workstation reported `AzureAdJoined : YES` and `DeviceAuthStatus : SUCCESS` while separate Intune configuration work was still required.
 
 ## Fix
 
-This public reconstruction turns those checks into a reusable validation script. It records:
+This public version turns those checks into a reusable validation script. It records:
 
 - Entra join state;
 - domain / enterprise join state;

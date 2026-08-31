@@ -35,7 +35,7 @@ The public version adds `SupportsShouldProcess`, input validation, a `-WhatIf` p
 
 ## Result
 
-The recovered execution transcript shows the support account being assigned successfully across a large set of previously ownerless sites. A separate verification command subsequently returned the support account as Owner for the remediated sites.
+The production run assigned the support account successfully across a large set of previously ownerless sites. A separate verification command subsequently returned the support account as Owner for the remediated sites.
 
 ## Notes
 
@@ -49,7 +49,7 @@ The original production code has been modified to run read-only for this public 
 Adds a designated site collection administrator to SharePoint Online sites identified as ownerless in a reviewed CSV export.
 
 .DESCRIPTION
-Public, parameterized version reconstructed from a recovered production console session.
+Public, parameterized version of the production workflow.
 The historical workflow first filtered an administrative CSV for sites with zero/blank owners,
 then assigned a support account as site collection administrator and verified the resulting Owner value.
 
