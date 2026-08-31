@@ -11,3 +11,28 @@ The historical session also demonstrated an important diagnostic distinction: fi
 
 ## Safety / Notes
 This is read-only. The public script takes the mailbox identity and destination path as parameters and performs no mutation.
+
+## Script
+
+```powershell
+[CmdletBinding()]
+param(
+    [Parameter(Mandatory)]
+    [string]$MailboxIdentity,
+
+    [string]$OutputPath = '.\MailboxProperties.csv'
+)
+
+$ErrorActionPreference = 'Stop'
+Import-Module ExchangeOnlineManagement
+Connect-ExchangeOnline -ShowBanner:$false
+
+try {
+    $mailbox = Get-Mailbox -Identity $MailboxIdentity -ErrorAction Stop
+    $mailbox | Select-Object * | Export-Csv -LiteralPath $OutputPath -NoTypeInformation
+    $mailbox | Format-List *
+}
+finally {
+    Disconnect-ExchangeOnline -Confirm:$false
+}
+```
