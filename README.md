@@ -24,11 +24,11 @@ IT Infrastructure & Microsoft 365 Lead with 15+ years of experience securing, mo
 
 I keep a sanitized [**IT Engineering Notebook**](notebook/README.md) of problems I have run into in production and what fixed them: scripts, configurations, and troubleshooting notes. A few entries:
 
-- [Microsoft 365 tenant consolidation and endpoint cutover](notebook/publishable/migrations/m365-tenant-consolidation.md)
-- [Targeted calendar cleanup with an approval gate](notebook/publishable/microsoft-365/calendar-item-targeted-cleanup.md)
-- [Bulk SharePoint recycle-bin restore](notebook/publishable/sharepoint/restore-recycle-bin-items.md)
-- [Migrating the Level RMM agent between tenants](notebook/publishable/windows/migrate-level-agent-tenant.md)
-- [Distribution-list audit that had to survive Exchange throttling](notebook/publishable/microsoft-365/audit-distribution-list-last-used.md)
+- [Microsoft 365 tenant consolidation and endpoint cutover](notebook/migrations/m365-tenant-consolidation.md)
+- [Targeted calendar cleanup with an approval gate](notebook/microsoft-365/calendar-item-targeted-cleanup.md)
+- [Bulk SharePoint recycle-bin restore](notebook/sharepoint/restore-recycle-bin-items.md)
+- [Migrating the Level RMM agent between tenants](notebook/windows/migrate-level-agent-tenant.md)
+- [Distribution-list audit that had to survive Exchange throttling](notebook/microsoft-365/audit-distribution-list-last-used.md)
 
 ## Toolbox
 
