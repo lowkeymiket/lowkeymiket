@@ -30,7 +30,7 @@ The original production code has been modified to run read-only for this public 
 
 ```powershell
 <#
-Recovered exact source from a four-tenant RMM consolidation.
+Original production script from a four-tenant RMM consolidation.
 Delivered through the OLD tenant's Level terminal: the wrapper writes the swap
 script to disk and launches it detached, so it survives the uninstall of the
 agent that delivered it. Only the tenant API key is a placeholder.

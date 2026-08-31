@@ -17,7 +17,7 @@ The public version searches both 32-bit and 64-bit uninstall registry paths, acc
 - Final verification treats still-installed targets as a failure instead of assuming the uninstall command succeeded.
 
 ## Result
-Recovered execution logs show the migration agent being removed successfully, ShareFile being removed after iterative testing, and final verification correctly identifying software that remained installed. The script re-checks installed state instead of treating an uninstall exit code as proof of success.
+In production the migration agent was removed successfully, ShareFile was removed after iterative testing, and final verification correctly identified software that remained installed. The script re-checks installed state instead of treating an uninstall exit code as proof of success.
 
 ## Notes
 

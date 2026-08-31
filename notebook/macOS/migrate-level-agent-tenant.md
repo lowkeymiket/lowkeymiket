@@ -30,7 +30,7 @@ The original production code has been modified to run read-only for this public 
 
 ```bash
 #!/bin/bash
-# Recovered tenant-swap script from a four-tenant RMM consolidation.
+# Production tenant-swap script from a four-tenant RMM consolidation.
 # Delivered through the OLD tenant's Level terminal and launched in the
 # background so it survives the uninstall of the agent that delivered it
 # (see the adjacent write-up for the delivery wrapper). API key is a placeholder.

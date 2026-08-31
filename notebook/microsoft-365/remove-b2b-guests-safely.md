@@ -22,7 +22,7 @@ The original production code has been modified to run read-only for this public 
 ## Script
 
 ```powershell
-<# Public reconstruction. Deliberately requires both Guest userType and #EXT# UPN marker. #>
+<# Public version. Deliberately requires both Guest userType and #EXT# UPN marker. #>
 param(
     [Parameter(Mandatory)] [string]$CsvPath,
     [string]$OutputCsv = '.\GuestRemovalResults.csv',

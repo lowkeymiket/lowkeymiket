@@ -21,7 +21,7 @@ The important design choice was to preserve the original and proposed values ins
 
 ## Fix
 
-This public reconstruction accepts two CSV exports:
+This public version accepts two CSV exports:
 
 1. The authoritative employee/source directory.
 2. The current Teams Phone assignment export.

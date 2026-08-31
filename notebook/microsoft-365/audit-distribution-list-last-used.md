@@ -4,10 +4,10 @@
 The tenant had accumulated a large number of distribution lists and the business needed a defensible way to decide which could be retired. Creation date and membership did not answer the important question: had the address actually received mail recently?
 
 ## Investigation
-The historical workflow enumerated Exchange Online distribution groups and queried `Get-MessageTraceV2` for each address. Recovered execution evidence shows the run progressing through named lists and then repeatedly hitting Exchange Online's "recent queries have surpassed the permitted limit" response. That failure became part of the design problem, not just an incidental error.
+The historical workflow enumerated Exchange Online distribution groups and queried `Get-MessageTraceV2` for each address. The production run progressed through named lists and then repeatedly hit Exchange Online's "recent queries have surpassed the permitted limit" response. That failure became part of the design problem, not just an incidental error.
 
 ## Fix
-The public reconstruction enumerates distribution groups, applies configurable naming exclusions, breaks the lookback period into smaller trace windows, retries likely throttling responses with exponential backoff, records the newest observed message date, and exports a review CSV with a blank `ReviewDecision` column.
+This public version enumerates distribution groups, applies configurable naming exclusions, breaks the lookback period into smaller trace windows, retries likely throttling responses with exponential backoff, records the newest observed message date, and exports a review CSV with a blank `ReviewDecision` column.
 
 ## Safety / Notes
 - Read-only discovery. The script never deletes groups.
@@ -29,7 +29,7 @@ The original production code is read-only by design; it only queries and reports
 
 ```powershell
 <#
-Reconstructed public version of a real Exchange Online distribution-list usage audit.
+Public version of a real Exchange Online distribution-list usage audit.
 The historical workflow used Get-MessageTraceV2 and produced a reviewable keep/delete report.
 Tenant-specific names, domains, dates, and exclusions have been parameterized.
 #>

@@ -17,7 +17,7 @@ The audit was designed as a fault-tolerant discovery job. It enumerates targets,
 - Explicitly preserves partial results when Graph cannot enumerate every location.
 
 ## Result
-The recovered execution transcript shows the historical job discovered **229 notebooks**, resolved **128 packages**, left **101 unresolved**, and recorded **541 errors** while still completing and producing notebook, progress, error, and transcript outputs. The high error count was useful operational data, not simply a failed run: it documented the boundaries of Graph/OneNote visibility across the tenant.
+The production run discovered **229 notebooks**, resolved **128 packages**, left **101 unresolved**, and recorded **541 errors** while still completing and producing notebook, progress, error, and transcript outputs. The high error count was useful operational data, not simply a failed run: it documented the boundaries of Graph/OneNote visibility across the tenant.
 
 ## Notes
 
@@ -27,7 +27,7 @@ The original production code is read-only by design; it only queries and reports
 
 ```powershell
 <#
-Reconstructed public version of a real tenant-wide OneNote discovery/audit workflow.
+Public version of a real tenant-wide OneNote discovery/audit workflow.
 It intentionally treats access-denied, missing OneDrive, and OneNote API limitations as reportable outcomes.
 #>
 [CmdletBinding()]

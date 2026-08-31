@@ -6,11 +6,11 @@ A user could receive mail but outbound external messages failed with `554 5.4.14
 
 ## Investigation
 
-Full RFC message headers were the evidence source: `Received`, `Authentication-Results`, and Exclaimer-specific processing headers. The recovered production headers show Exchange Online handing an outbound message to Exclaimer, Exclaimer processing it, and the message returning to Microsoft 365 protection. SPF and DMARC passed in the captured example, which separated authentication health from transport-routing health: the problem class was connector and routing behavior, not authentication.
+Full RFC message headers were the evidence source: `Received`, `Authentication-Results`, and Exclaimer-specific processing headers. The production headers show Exchange Online handing an outbound message to Exclaimer, Exclaimer processing it, and the message returning to Microsoft 365 protection. SPF and DMARC passed in the captured example, which separated authentication health from transport-routing health: the problem class was connector and routing behavior, not authentication.
 
 ## Fix
 
-The troubleshooting method reconstructed the transport chain hop by hop, correlated sender IPs and HELO values, and identified Exclaimer processing markers to establish where a routing loop or connector mismatch could occur.
+The troubleshooting method mapped the transport chain hop by hop, correlated sender IPs and HELO values, and identified Exclaimer processing markers to establish where a routing loop or connector mismatch could occur.
 
 The accompanying script packages that method. It parses an `.eml` file and:
 
@@ -20,7 +20,7 @@ The accompanying script packages that method. It parses an `.eml` file and:
 - extracts authentication results;
 - surfaces Exclaimer processing headers;
 - flags transport hosts that recur multiple times; and
-- optionally exports the reconstructed hop path to CSV.
+- optionally exports the mapped hop path to CSV.
 
 Repeated hosts are not automatically declared a loop because legitimate mail paths can revisit infrastructure. The output makes the route visible so it can be compared with connector and transport-rule configuration.
 
@@ -33,7 +33,7 @@ Repeated hosts are not automatically declared a loop because legitimate mail pat
 
 ## Result
 
-The original incident was narrowed from a generic external-send failure to a mail-flow problem on the Microsoft 365 / Exclaimer route, giving a concrete path for reviewing connector scoping and preventing a repeated relay path. The recovered headers independently prove the environment's actual route through Exclaimer and back into Exchange Online protection.
+The original incident was narrowed from a generic external-send failure to a mail-flow problem on the Microsoft 365 / Exclaimer route, giving a concrete path for reviewing connector scoping and preventing a repeated relay path. The captured headers independently prove the environment's actual route through Exclaimer and back into Exchange Online protection.
 
 ## Notes
 
