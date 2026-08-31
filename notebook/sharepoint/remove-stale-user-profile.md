@@ -16,11 +16,8 @@ A PnP PowerShell workflow connects to each affected SharePoint or OneDrive site,
 The stale identity was removed from affected sites while the active Entra account remained intact, resolving the legacy-account conflict.
 
 ## Notes
-**Recovered from the production console session and parameterized for publication.** Organization domains, names, app IDs, and paths were removed.
 
-## Publication note
-
-The script below is published in read-only mode: a guard at the top stops execution before any change is made. It is included to document the approach, for educational purposes.
+The original production code has been modified to run read-only for this public notebook.
 
 ## Script
 

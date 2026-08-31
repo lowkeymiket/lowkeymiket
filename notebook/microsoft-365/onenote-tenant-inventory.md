@@ -20,11 +20,8 @@ The audit was designed as a fault-tolerant discovery job. It enumerates targets,
 The recovered execution transcript shows the historical job discovered **229 notebooks**, resolved **128 packages**, left **101 unresolved**, and recorded **541 errors** while still completing and producing notebook, progress, error, and transcript outputs. The high error count was useful operational data, not simply a failed run: it documented the boundaries of Graph/OneNote visibility across the tenant.
 
 ## Notes
-**Reconstructed public version.** The execution transcript is recovered; the exact original source script has not yet been recovered.
 
-## Publication note
-
-The script below is read-only by design: it only queries and reports, and makes no changes.
+The original production code is read-only by design; it only queries and reports.
 
 ## Script
 

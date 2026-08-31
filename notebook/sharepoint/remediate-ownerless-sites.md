@@ -39,11 +39,7 @@ The recovered execution transcript shows the support account being assigned succ
 
 ## Notes
 
-**Recovered production workflow, parameterized and hardened for public release.** The discovery, mutation, and verification command sequences are all preserved in private `raw-recovered/` evidence.
-
-## Publication note
-
-The script below is published in read-only mode: WhatIf/dry-run is forced on, so it simulates and logs the changes it would make without making them. It is included to document the approach, for educational purposes.
+The original production code has been modified to run read-only for this public notebook.
 
 ## Script
 

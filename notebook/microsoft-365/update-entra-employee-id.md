@@ -17,11 +17,8 @@ A Microsoft Graph PowerShell script imports a CSV, validates each row, looks up 
 The workflow turned a repetitive directory-maintenance task into a reviewable bulk operation with an audit CSV and clear handling for exceptions.
 
 ## Notes
-**Recovered exact source.** The publishable copy removes organization-specific input data but preserves the original script logic.
 
-## Publication note
-
-The script below is published in read-only mode: WhatIf/dry-run is forced on, so it simulates and logs the changes it would make without making them. It is included to document the approach, for educational purposes.
+The original production code has been modified to run read-only for this public notebook.
 
 ## Script
 

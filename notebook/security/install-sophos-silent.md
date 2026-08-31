@@ -20,11 +20,8 @@ This script is the reinstall leg. The PowerShell wrapper validates the packaged 
 Endpoints came through the migration with the re-ACL running at normal speed instead of days, then were re-protected in the consolidated Sophos tenant through a silent RMM push, with endpoint-side logs retained for any failed installs.
 
 ## Notes
-**Recovered exact source with organization-specific installer naming sanitized.**
 
-## Publication note
-
-The script below is published in read-only mode: a guard at the top stops execution before any change is made. It is included to document the approach, for educational purposes.
+The original production code has been modified to run read-only for this public notebook.
 
 ## Script
 

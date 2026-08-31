@@ -23,11 +23,8 @@ The wrapper writes the migration script to disk through the RMM terminal, then l
 Endpoints across the four RMM tenants were swapped into the consolidated tenant remotely, without console access to each machine. Uninstall-only variants of these scripts covered endpoints that were leaving RMM management entirely.
 
 ## Notes
-**Recovered exact source.** Only the tenant API key is a placeholder. The write-to-disk-then-detach delivery is part of the recovered design, not packaging for publication.
 
-## Publication note
-
-The script below is published in read-only mode: a guard at the top stops execution before any change is made. It is included to document the approach, for educational purposes.
+The original production code has been modified to run read-only for this public notebook.
 
 ## Script
 

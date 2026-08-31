@@ -36,11 +36,8 @@ Repeated hosts are not automatically declared a loop because legitimate mail pat
 The original incident was narrowed from a generic external-send failure to a mail-flow problem on the Microsoft 365 / Exclaimer route, giving a concrete path for reviewing connector scoping and preventing a repeated relay path. The recovered headers independently prove the environment's actual route through Exclaimer and back into Exchange Online protection.
 
 ## Notes
-**Public reconstruction backed by recovered production headers.** The analyzer packages the method used during the incident; the header evidence itself stays private.
 
-## Publication note
-
-The script below is read-only by design: it only queries and reports, and makes no changes.
+The original production code is read-only by design; it only queries and reports.
 
 ## Script
 

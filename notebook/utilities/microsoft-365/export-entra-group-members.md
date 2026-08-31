@@ -15,9 +15,9 @@ Query the group by its mail address with Microsoft Graph, resolve its object ID,
 ## Result
 The historical run successfully exported the requested group membership to CSV.
 
-## Publication note
+## Notes
 
-The script below is read-only by design: it only queries and reports, and makes no changes.
+The original production code is read-only by design; it only queries and reports.
 
 ## Script
 

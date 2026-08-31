@@ -23,11 +23,8 @@ The script itself runs the vendor uninstall, removes the agent identity/config (
 Combined with the Windows swap script, this gave a cross-platform remote path for consolidating four RMM tenants into one during the wider tenant-to-tenant migration.
 
 ## Notes
-**Recovered exact source.** Only the tenant API key is a placeholder; the background launch is part of the recovered design.
 
-## Publication note
-
-The script below is published in read-only mode: a guard at the top stops execution before any change is made. It is included to document the approach, for educational purposes.
+The original production code has been modified to run read-only for this public notebook.
 
 ## Script
 
