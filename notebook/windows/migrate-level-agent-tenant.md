@@ -25,6 +25,10 @@ Endpoints across the four RMM tenants were swapped into the consolidated tenant 
 ## Notes
 **Recovered exact source.** Only the tenant API key is a placeholder. The write-to-disk-then-detach delivery is part of the recovered design, not packaging for publication.
 
+## Publication note
+
+The script below is published in read-only mode: a guard at the top stops execution before any change is made. It is included to document the approach, for educational purposes.
+
 ## Script
 
 ```powershell
@@ -34,6 +38,14 @@ Delivered through the OLD tenant's Level terminal: the wrapper writes the swap
 script to disk and launches it detached, so it survives the uninstall of the
 agent that delivered it. Only the tenant API key is a placeholder.
 #>
+
+# Read-only for publication: this guard stops the script before any
+# change is made. The rest is preserved to document the approach.
+$ReadOnly = $true
+if ($ReadOnly) {
+    Write-Output 'READ-ONLY published copy; execution disabled.'
+    exit 0
+}
 
 $scriptPath = "C:\Windows\Temp\level-swap-to-new.ps1"
 

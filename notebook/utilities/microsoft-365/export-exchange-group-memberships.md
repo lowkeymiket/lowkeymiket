@@ -18,6 +18,10 @@ This pattern replaced manual group-by-group inspection with a tenant-scale membe
 ## Notes
 **Public Reconstruction from historical Exchange administration work.** Exact original source has not yet been recovered.
 
+## Publication note
+
+The script below is read-only by design: it only queries and reports, and makes no changes.
+
 ## Script
 
 ```powershell

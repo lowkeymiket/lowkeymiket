@@ -19,6 +19,10 @@ The public version searches both 32-bit and 64-bit uninstall registry paths, acc
 ## Result
 Recovered execution logs show the migration agent being removed successfully, ShareFile being removed after iterative testing, and final verification correctly identifying software that remained installed. The script re-checks installed state instead of treating an uninstall exit code as proof of success.
 
+## Publication note
+
+The script below is published in read-only mode: WhatIf/dry-run is forced on, so it simulates and logs the changes it would make without making them. It is included to document the approach, for educational purposes.
+
 ## Script
 
 ```powershell
@@ -31,6 +35,10 @@ param(
 )
 
 $ErrorActionPreference = 'Stop'
+
+# Read-only for publication: WhatIf is forced on, so every change is
+# simulated and logged instead of executed.
+$WhatIfPreference = $true
 $logDir = Split-Path $LogPath -Parent
 if (-not (Test-Path $logDir)) { New-Item -ItemType Directory -Path $logDir -Force | Out-Null }
 

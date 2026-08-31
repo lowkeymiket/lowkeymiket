@@ -18,6 +18,10 @@ The stale identity was removed from affected sites while the active Entra accoun
 ## Notes
 **Recovered from the production console session and parameterized for publication.** Organization domains, names, app IDs, and paths were removed.
 
+## Publication note
+
+The script below is published in read-only mode: a guard at the top stops execution before any change is made. It is included to document the approach, for educational purposes.
+
 ## Script
 
 ```powershell
@@ -29,6 +33,14 @@ param(
     [Parameter(Mandatory)] [string]$ClientId,
     [string]$OutputCsv = '.\SharePointUserCleanupResults.csv'
 )
+
+# Read-only for publication: this guard stops the script before any
+# change is made. The rest is preserved to document the approach.
+$ReadOnly = $true
+if ($ReadOnly) {
+    Write-Output 'READ-ONLY published copy; execution disabled.'
+    exit 0
+}
 
 $results = @()
 $csv = Import-Csv $SitesCsv

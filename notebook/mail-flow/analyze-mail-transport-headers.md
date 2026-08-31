@@ -38,6 +38,10 @@ The original incident was narrowed from a generic external-send failure to a mai
 ## Notes
 **Public reconstruction backed by recovered production headers.** The analyzer packages the method used during the incident; the header evidence itself stays private.
 
+## Publication note
+
+The script below is read-only by design: it only queries and reports, and makes no changes.
+
 ## Script
 
 ```powershell

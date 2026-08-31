@@ -18,6 +18,10 @@ The matching model used the mailbox, organizer/sender, subject, start and end ti
 ## Result
 The historical workflow was first used for individual affected mailboxes and then safely expanded using the reviewed approval list.
 
+## Publication note
+
+The script below is published in read-only mode: WhatIf/dry-run is forced on, so it simulates and logs the changes it would make without making them. It is included to document the approach, for educational purposes.
+
 ## Script
 
 ```powershell
@@ -28,6 +32,10 @@ param(
 )
 
 $ErrorActionPreference = 'Stop'
+
+# Read-only for publication: WhatIf is forced on, so every change is
+# simulated and logged instead of executed.
+$WhatIfPreference = $true
 Import-Module Microsoft.Graph.Authentication
 Import-Module Microsoft.Graph.Calendar
 Connect-MgGraph -Scopes 'Calendars.ReadWrite' -NoWelcome

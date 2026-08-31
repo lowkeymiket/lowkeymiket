@@ -22,6 +22,10 @@ The process converted a potentially enormous manual recovery task into a control
 ## Notes
 **Recovered from production console sessions and parameterized for publication.**
 
+## Publication note
+
+The script below is published in read-only mode: a guard at the top stops execution before any change is made. It is included to document the approach, for educational purposes.
+
 ## Script
 
 ```powershell
@@ -29,6 +33,14 @@ param(
     [Parameter(Mandatory)] [string]$CsvPath,
     [int]$DelayMilliseconds = 500
 )
+
+# Read-only for publication: this guard stops the script before any
+# change is made. The rest is preserved to document the approach.
+$ReadOnly = $true
+if ($ReadOnly) {
+    Write-Output 'READ-ONLY published copy; execution disabled.'
+    exit 0
+}
 
 # Requires an existing Connect-PnPOnline session to the target site.
 

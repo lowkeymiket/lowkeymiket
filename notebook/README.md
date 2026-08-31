@@ -56,3 +56,5 @@ Some fixes are configuration-only. I have not added fake scripts just to make th
 ## Sanitization
 
 Domains, employee identities, tenant/application IDs, internal paths, IP addresses, and customer data are removed or parameterized where needed. Some scripts are recovered source and others are sanitized reconstructions of the production fix.
+
+Scripts that make changes are additionally published in read-only mode: a forced dry-run or an execution guard prevents them from modifying anything as published. Each affected entry carries a publication note.

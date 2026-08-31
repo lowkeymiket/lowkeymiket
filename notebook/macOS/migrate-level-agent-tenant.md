@@ -25,6 +25,10 @@ Combined with the Windows swap script, this gave a cross-platform remote path fo
 ## Notes
 **Recovered exact source.** Only the tenant API key is a placeholder; the background launch is part of the recovered design.
 
+## Publication note
+
+The script below is published in read-only mode: a guard at the top stops execution before any change is made. It is included to document the approach, for educational purposes.
+
 ## Script
 
 ```bash
@@ -33,6 +37,14 @@ Combined with the Windows swap script, this gave a cross-platform remote path fo
 # Delivered through the OLD tenant's Level terminal and launched in the
 # background so it survives the uninstall of the agent that delivered it
 # (see the adjacent write-up for the delivery wrapper). API key is a placeholder.
+
+# Read-only for publication: this guard stops the script before any
+# change is made. The rest is preserved to document the approach.
+READ_ONLY=1
+if [ "$READ_ONLY" = "1" ]; then
+  echo "READ-ONLY published copy; execution disabled."
+  exit 0
+fi
 
 LOG="/var/tmp/level-migrate.log"
 OUT="/var/tmp/level-migrate.out"

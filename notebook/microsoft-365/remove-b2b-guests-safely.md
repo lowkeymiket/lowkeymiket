@@ -18,6 +18,10 @@ The workflow provides a safer template for bulk guest cleanup than directly pipi
 ## Notes
 **Reconstructed public version** from the production-safe workflow we used. Exact historical source was not recovered.
 
+## Publication note
+
+The script below is published in read-only mode: WhatIf/dry-run is forced on, so it simulates and logs the changes it would make without making them. It is included to document the approach, for educational purposes.
+
 ## Script
 
 ```powershell
@@ -27,6 +31,9 @@ param(
     [string]$OutputCsv = '.\GuestRemovalResults.csv',
     [switch]$WhatIf
 )
+
+# Read-only for publication: WhatIf is forced on; no changes are made.
+$WhatIf = $true
 Connect-MgGraph -Scopes 'User.ReadWrite.All'
 $results = foreach ($row in (Import-Csv $CsvPath)) {
     $upn = $row.UserPrincipalName

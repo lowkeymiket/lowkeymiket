@@ -19,6 +19,10 @@ The workflow turned a repetitive directory-maintenance task into a reviewable bu
 ## Notes
 **Recovered exact source.** The publishable copy removes organization-specific input data but preserves the original script logic.
 
+## Publication note
+
+The script below is published in read-only mode: WhatIf/dry-run is forced on, so it simulates and logs the changes it would make without making them. It is included to document the approach, for educational purposes.
+
 ## Script
 
 ```powershell
@@ -31,6 +35,9 @@ param(
 
     [switch]$DryRun
 )
+
+# Read-only for publication: DryRun is forced on; no changes are made.
+$DryRun = $true
 
 $ErrorActionPreference = 'Stop'
 

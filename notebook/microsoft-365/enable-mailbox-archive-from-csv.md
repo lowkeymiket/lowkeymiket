@@ -16,6 +16,10 @@ Use Exchange Online PowerShell to import a reviewed CSV, inspect each mailbox's 
 ## Result
 The historical workflow produced a working CSV-driven archive-enablement template for Exchange Online administration. The public version here is hardened and sanitized.
 
+## Publication note
+
+The script below is published in read-only mode: WhatIf/dry-run is forced on, so it simulates and logs the changes it would make without making them. It is included to document the approach, for educational purposes.
+
 ## Script
 
 ```powershell
@@ -30,6 +34,10 @@ param(
 )
 
 $ErrorActionPreference = 'Stop'
+
+# Read-only for publication: WhatIf is forced on, so every change is
+# simulated and logged instead of executed.
+$WhatIfPreference = $true
 
 if (-not (Test-Path -LiteralPath $CsvPath)) {
     throw "CSV not found: $CsvPath"
