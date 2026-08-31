@@ -41,6 +41,10 @@ The recovered execution transcript shows the support account being assigned succ
 
 **Recovered production workflow, parameterized and hardened for public release.** The discovery, mutation, and verification command sequences are all preserved in private `raw-recovered/` evidence.
 
+## Publication note
+
+The script below is published in read-only mode: WhatIf/dry-run is forced on, so it simulates and logs the changes it would make without making them. It is included to document the approach, for educational purposes.
+
 ## Script
 
 ```powershell
@@ -70,6 +74,10 @@ param(
 )
 
 $ErrorActionPreference = 'Stop'
+
+# Read-only for publication: WhatIf is forced on, so every change is
+# simulated and logged instead of executed.
+$WhatIfPreference = $true
 # Assumes an existing SharePoint Online admin session (Connect-SPOService).
 
 if (-not (Test-Path -LiteralPath $CsvPath)) {

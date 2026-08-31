@@ -22,6 +22,10 @@ Endpoints came through the migration with the re-ACL running at normal speed ins
 ## Notes
 **Recovered exact source with organization-specific installer naming sanitized.**
 
+## Publication note
+
+The script below is published in read-only mode: a guard at the top stops execution before any change is made. It is included to document the approach, for educational purposes.
+
 ## Script
 
 ```powershell
@@ -30,6 +34,14 @@ Endpoints came through the migration with the re-ACL running at normal speed ins
 # Runs silently and does not initiate a restart.
 
 $ErrorActionPreference = "Stop"
+
+# Read-only for publication: this guard stops the script before any
+# change is made. The rest is preserved to document the approach.
+$ReadOnly = $true
+if ($ReadOnly) {
+    Write-Output 'READ-ONLY published copy; execution disabled.'
+    exit 0
+}
 
 $InstallerName = "SophosSetup.exe"
 $InstallerPath = Join-Path -Path $PSScriptRoot -ChildPath $InstallerName

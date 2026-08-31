@@ -18,6 +18,10 @@ The historical workflow supported tenant-wide auditing verification and bulk adm
 ## Notes
 **Public Reconstruction from historical tenant-wide mailbox auditing work.** Exact original source has not yet been recovered.
 
+## Publication note
+
+The script below is read-only by design: it only queries and reports, and makes no changes.
+
 ## Script
 
 ```powershell

@@ -29,6 +29,10 @@ The script is completely read-only. It deliberately does not attempt automatic e
 
 The diagnostic approach prevented a successful Entra join from being incorrectly treated as a complete endpoint migration. That distinction is important during large tenant cutovers because identity, Office profile transition, OneDrive transition, and MDM enrollment can succeed or fail independently.
 
+## Publication note
+
+The script below is read-only by design: it only queries and reports, and makes no changes.
+
 ## Script
 
 ```powershell

@@ -47,6 +47,10 @@ The historical workflow created a traceable merge log showing which users requir
 
 **Public Reconstruction.** The historical reconciliation spreadsheets and merge log were recovered, but the exact original transformation script was not.
 
+## Publication note
+
+The script below is read-only by design: it only queries and reports, and makes no changes.
+
 ## Script
 
 ```powershell

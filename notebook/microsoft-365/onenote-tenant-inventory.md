@@ -22,6 +22,10 @@ The recovered execution transcript shows the historical job discovered **229 not
 ## Notes
 **Reconstructed public version.** The execution transcript is recovered; the exact original source script has not yet been recovered.
 
+## Publication note
+
+The script below is read-only by design: it only queries and reports, and makes no changes.
+
 ## Script
 
 ```powershell
