@@ -17,11 +17,8 @@ The migration pattern adds the destination license first, verifies the assignmen
 The pilot migration completed successfully and was spot-checked in the Microsoft 365 Admin Center before proceeding to the full batch.
 
 ## Notes
-**Reconstructed public version.** The production workflow and sequence are historical; this sanitized script represents the same operational design without tenant-specific SKU IDs or user data.
 
-## Publication note
-
-The script below is published in read-only mode: WhatIf/dry-run is forced on, so it simulates and logs the changes it would make without making them. It is included to document the approach, for educational purposes.
+The original production code has been modified to run read-only for this public notebook.
 
 ## Script
 

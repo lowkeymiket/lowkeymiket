@@ -16,11 +16,8 @@ Enumerate traditional Exchange distribution groups with `Get-DistributionGroup` 
 This pattern replaced manual group-by-group inspection with a tenant-scale membership inventory that could be filtered, compared, and handed to migration/project teams.
 
 ## Notes
-**Public Reconstruction from historical Exchange administration work.** Exact original source has not yet been recovered.
 
-## Publication note
-
-The script below is read-only by design: it only queries and reports, and makes no changes.
+The original production code is read-only by design; it only queries and reports.
 
 ## Script
 

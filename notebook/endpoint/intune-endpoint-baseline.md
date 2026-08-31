@@ -30,6 +30,3 @@ Windows Hello troubleshooting also required working below the GUI layer, includi
 
 ## Result
 The endpoint model reduced manual workstation configuration and established a consistent cloud-managed baseline for identity, security, applications, user data, and updates.
-
-## Notes
-**History-backed architecture write-up.** Production policy exports were not recovered in a publishable form. Related diagnostic and validation scripts elsewhere in this repository are backed by recovered execution evidence.

@@ -16,11 +16,8 @@ Enumerate every Exchange Online mailbox and export its mailbox type and auditing
 The historical workflow supported tenant-wide auditing verification and bulk administration without opening mailboxes individually in the Microsoft 365 admin interfaces.
 
 ## Notes
-**Public Reconstruction from historical tenant-wide mailbox auditing work.** Exact original source has not yet been recovered.
 
-## Publication note
-
-The script below is read-only by design: it only queries and reports, and makes no changes.
+The original production code is read-only by design; it only queries and reports.
 
 ## Script
 

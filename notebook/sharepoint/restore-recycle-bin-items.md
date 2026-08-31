@@ -20,11 +20,8 @@ The final workflow imports a reviewed CSV containing recycle-bin GUIDs and calls
 The process converted a potentially enormous manual recovery task into a controlled bulk-restoration workflow and exposed collisions where a file already existed at the original path.
 
 ## Notes
-**Recovered from production console sessions and parameterized for publication.**
 
-## Publication note
-
-The script below is published in read-only mode: a guard at the top stops execution before any change is made. It is included to document the approach, for educational purposes.
+The original production code has been modified to run read-only for this public notebook.
 
 ## Script
 

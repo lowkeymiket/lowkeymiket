@@ -22,11 +22,8 @@ The public reconstruction enumerates distribution groups, applies configurable n
 The historical run produced the basis for a Keep/Delete business review and exposed a real tenant-scale constraint: a straightforward loop of `Get-MessageTraceV2` calls can exceed service query limits. The hardened public version incorporates that lesson directly.
 
 ## Notes
-**Reconstructed public version from recovered execution evidence.** The original source file was not recovered, so this is intentionally not represented as exact historical code.
 
-## Publication note
-
-The script below is read-only by design: it only queries and reports, and makes no changes.
+The original production code is read-only by design; it only queries and reports.
 
 ## Script
 

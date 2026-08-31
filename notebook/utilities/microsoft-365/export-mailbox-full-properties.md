@@ -12,9 +12,9 @@ The historical session also demonstrated an important diagnostic distinction: fi
 ## Safety / Notes
 This is read-only. The public script takes the mailbox identity and destination path as parameters and performs no mutation.
 
-## Publication note
+## Notes
 
-The script below is read-only by design: it only queries and reports, and makes no changes.
+The original production code is read-only by design; it only queries and reports.
 
 ## Script
 
