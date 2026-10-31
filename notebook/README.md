@@ -13,6 +13,7 @@ Nothing here is intended to be a universal runbook. These are sanitized versions
 - Distribution-list usage auditing with throttling handling
 - Tenant-wide OneNote inventory
 - Every OneNote notebook in a tenant, through app-only Graph
+- Read-only Entra ID tenant audit through delegated Graph
 - Safe B2B guest removal
 - Archive mailbox enablement from CSV
 
