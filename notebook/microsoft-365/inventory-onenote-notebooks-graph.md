@@ -1,7 +1,7 @@
 # Inventory Every OneNote Notebook in a Tenant with Microsoft Graph
 
 ## Problem
-A migration was going to change every SharePoint and OneDrive URL in the organisation, so every OneNote notebook had to be accounted for first: where it lived, who created it, and whether anyone still used it. No admin centre lists notebooks. In a document library a notebook is just a folder of `.one` section files with a `.onetoc2` table of contents.
+A migration was going to change every SharePoint and OneDrive URL in the organization, so every OneNote notebook had to be accounted for first: where it lived, who created it, and whether anyone still used it. No admin center lists notebooks. In a document library a notebook is just a folder of `.one` section files with a `.onetoc2` table of contents.
 
 ## Investigation
 The per-user OneNote API route had already shown its limits ([Tenant-Wide OneNote Inventory](onenote-tenant-inventory.md)). A delegated admin session was no better: `sites/getAllSites` needs an application permission and returned 403, so that crawl saw fewer than half of the sites. The working approach reads the files instead, through app-only Graph with a certificate: unattended, and with a permission that cannot write.
