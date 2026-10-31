@@ -12,6 +12,7 @@ Nothing here is intended to be a universal runbook. These are sanitized versions
 - Targeted calendar cleanup with an approval gate
 - Distribution-list usage auditing with throttling handling
 - Tenant-wide OneNote inventory
+- Every OneNote notebook in a tenant, through app-only Graph
 - Safe B2B guest removal
 - Archive mailbox enablement from CSV
 
