@@ -28,6 +28,7 @@ Nothing here is intended to be a universal runbook. These are sanitized versions
 
 ### Networking
 - Cleanup of a retired Azure IPsec tunnel and its dependencies
+- Self-hosted apps on a Synology NAS behind Cloudflare Tunnel, no inbound ports
 
 ### Migrations and endpoints
 - Microsoft 365 tenant consolidation and endpoint cutover
