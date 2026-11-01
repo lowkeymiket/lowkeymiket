@@ -4,45 +4,49 @@ Scripts, configurations, and troubleshooting notes from problems I have run into
 
 Nothing here is intended to be a universal runbook. These are sanitized versions of fixes that were useful in a specific environment. Review the assumptions and test them before using anything in production.
 
-## Fixes
+## Folders
 
-### Microsoft 365
-- Bulk employee ID updates in Entra ID
-- License migration between SKUs with add-before-remove validation
-- Targeted calendar cleanup with an approval gate
-- Distribution-list usage auditing with throttling handling
-- Tenant-wide OneNote inventory
-- Every OneNote notebook in a tenant, through app-only Graph
-- Read-only Entra ID tenant audit through delegated Graph
-- Safe B2B guest removal
-- Archive mailbox enablement from CSV
+### Networking & firewalls
+- [Cleanup of a retired Azure IPsec tunnel and its dependencies](networking/fortigate-legacy-azure-ipsec-cleanup.md)
 
-### SharePoint
-- Restore large numbers of recycle-bin items
-- Remove stale user identities after rehire/account conflicts
-- Remediate ownerless sites
+### Microsoft 365 & identity
+- [Microsoft 365 tenant consolidation and endpoint cutover](microsoft-365/m365-tenant-consolidation.md)
+- [Entra join and MDM state validation](microsoft-365/validate-entra-mdm-state.md)
+- [Read-only Entra ID tenant audit through delegated Graph](microsoft-365/audit-entra-tenant-read-only-graph.md)
+- [Bulk employee ID updates in Entra ID](microsoft-365/update-entra-employee-id.md)
+- [Safe B2B guest removal](microsoft-365/remove-b2b-guests-safely.md)
+- [License migration between SKUs with add-before-remove validation](microsoft-365/migrate-license-atomic.md)
+- [Entra group membership export through Graph](microsoft-365/export-entra-group-members.md) (read-only helper)
 
-### Security and mail flow
-- Silent Sophos deployment through RMM, sequenced around a tenant-migration re-ACL stall
-- Exchange Online / Exclaimer transport-path analysis
+### Exchange & communications
+- [Exchange Online / Exclaimer transport-path analysis](exchange/analyze-mail-transport-headers.md)
+- [Targeted calendar cleanup with an approval gate](exchange/calendar-item-targeted-cleanup.md)
+- [Archive mailbox enablement from CSV](exchange/enable-mailbox-archive-from-csv.md)
+- [Mailbox-auditing state review](exchange/audit-mailbox-auditing-state.md) (read-only helper)
+- [Full mailbox property export for troubleshooting](exchange/export-mailbox-full-properties.md) (read-only helper)
+- [Distribution-list usage auditing with throttling handling](exchange/audit-distribution-list-last-used.md)
+- [Exchange group membership export](exchange/export-exchange-group-memberships.md) (read-only helper)
+- [Phone-number reconciliation between source records and Teams assignments](exchange/audit-phone-number-reconciliation.md)
 
-### Networking
-- Cleanup of a retired Azure IPsec tunnel and its dependencies
-- Self-hosted apps on a Synology NAS behind Cloudflare Tunnel, no inbound ports
+### SharePoint & data
+- [Restore large numbers of recycle-bin items](sharepoint/restore-recycle-bin-items.md)
+- [Remediate ownerless sites](sharepoint/remediate-ownerless-sites.md)
+- [Remove stale user identities after rehire/account conflicts](sharepoint/remove-stale-user-profile.md)
+- [Tenant-wide OneNote inventory](sharepoint/onenote-tenant-inventory.md)
+- [Every OneNote notebook in a tenant, through app-only Graph](sharepoint/inventory-onenote-notebooks-graph.md)
 
-### Migrations and endpoints
-- Microsoft 365 tenant consolidation and endpoint cutover
-- Entra join and MDM state validation
-- Intune endpoint baseline
-- Level RMM agent migration between tenants on Windows and macOS
-- Legacy application cleanup after migration
+### Endpoint automation
+- Level RMM agent migration between tenants on [Windows](endpoint/migrate-level-agent-tenant-windows.md) and [macOS](endpoint/migrate-level-agent-tenant-macos.md)
+- [Silent Sophos deployment through RMM, sequenced around a tenant-migration re-ACL stall](endpoint/install-sophos-silent.md)
+- [Intune endpoint baseline](endpoint/intune-endpoint-baseline.md)
+- [Legacy application cleanup after migration](endpoint/remove-legacy-apps-by-name.md)
 
-### Teams Voice
-- Phone-number reconciliation between source records and Teams assignments
+### Cloud & self-hosting
+- [Self-hosted apps on a Synology NAS behind Cloudflare Tunnel, no inbound ports](cloud/cloudflare-tunnel-synology-docker.md)
 
-## Utilities
+## Read-only helpers
 
-`utilities/` contains smaller read-only helpers that are useful during troubleshooting but do not need a full problem/fix entry in the main collection. Examples include mailbox property exports, group membership exports, and mailbox-auditing checks.
+Smaller read-only helpers that are useful during troubleshooting but do not need a full problem/fix entry sit in the folder of the service they read, marked "read-only helper" above: mailbox property exports, group membership exports, and mailbox-auditing checks.
 
 ## Documentation
 
