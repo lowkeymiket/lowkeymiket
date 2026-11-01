@@ -7,7 +7,7 @@ IT Infrastructure & Microsoft 365 Lead with 15+ years of experience securing, mo
 - **Microsoft 365 administration**: Exchange Online, Teams, SharePoint, and OneDrive across multi-company environments, including bulk mailbox operations driven by the Microsoft Graph API
 - **Identity & security**: Entra ID, Conditional Access, passwordless authentication (FIDO2, Windows Hello for Business), RBAC, and risk-based controls
 - **Tenant consolidation**: technical project lead for consolidating four independent Microsoft 365 tenants into one (roughly 1,000 mailboxes, 650 OneDrive accounts, 300 SharePoint sites, and 200 managed devices)
-- **PowerShell automation**: 31 production scripts for administration, migration, reporting, and endpoint management, built to run silently and idempotently at fleet scale through RMM tooling
+- **PowerShell automation**: Production scripts for administration, migration, reporting, and endpoint management, built to run silently and idempotently at fleet scale through RMM tooling
 - **Azure & endpoints**: VMs, networking, storage, backup, and monitoring, plus Intune device management from enrollment through compliance
 - **Internal tooling**: small end-user utilities in C#/WinForms (self-service cache cleanup, technician-facing removal tools)
 
