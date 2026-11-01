@@ -4,7 +4,7 @@
 A tenant audit asks the same questions every time: users and guests, groups and their members, license seats, directory roles, app registrations and service principals, domains, conditional access, recent sign-ins. The admin center answers one blade at a time and exports little. The account doing the looking is an administrator's, so the audit has to be unable to change what it audits.
 
 ## Investigation
-Unlike the [OneNote notebook inventory](inventory-onenote-notebooks-graph.md), this work is interactive and needs directory and policy data, so it uses a delegated sign-in rather than an app-only certificate. Requesting only `*.Read.All` scopes looked sufficient. It is not: delegated consent for the Graph command-line client accumulates per user, and every new token carries the union of everything ever granted. In the tenant this came from, the token still held write permissions from earlier work.
+Unlike the [OneNote notebook inventory](../sharepoint/inventory-onenote-notebooks-graph.md), this work is interactive and needs directory and policy data, so it uses a delegated sign-in rather than an app-only certificate. Requesting only `*.Read.All` scopes looked sufficient. It is not: delegated consent for the Graph command-line client accumulates per user, and every new token carries the union of everything ever granted. In the tenant this came from, the token still held write permissions from earlier work.
 
 ## Fix
 One script, three layers:
