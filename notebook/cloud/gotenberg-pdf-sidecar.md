@@ -1,4 +1,4 @@
-# Render Pixel-Faithful PDFs from Word Files with a Gotenberg Sidecar
+# Convert Word Files to Faithful PDFs with a Gotenberg Sidecar
 
 ## Problem
 An app builds a tailored resume as a Word file, and the PDF made from it goes to employers, so PDF fidelity is what the reader sees. The app's own drawn PDF was an approximation. Beside the Word rendering it came out in a serif font instead of Roboto, lost the heading color and every bold line, and ran three pages instead of two.
@@ -24,11 +24,11 @@ No pure JavaScript library lays out Word documents faithfully, and a headless br
 - The app distrusts the reply: no redirects, 10 MB in, 20 MB out, and the body must start with `%PDF-`.
 
 ## Result
-On a small two-bay NAS with about 6 GB of RAM, the container used 9 MB idle, 123 MB after the first conversion and 140 MB with three in parallel, and the first conversion took under 2 seconds cold. A Word-built resume converts to two pages in Roboto, matching the Word rendering. A converter that is down, slow or wrong costs fidelity, never availability. Links in converted PDFs are not click-tested yet.
+On a small two-bay NAS the container used about 6 MB idle and about 100 MB after a conversion, against its 768 MB limit, and a first conversion took about 2 seconds cold. A Word-built resume converts to two pages in Roboto, matching the Word rendering. A converter that is down, slow or wrong costs fidelity, never availability.
 
 ## Notes
 
-The compose fragment is condensed from a production stack with names and paths generalized. The script reads only the `.docx` you name and writes only the PDF at `-OutPath`. The sidecar publishes no ports, so run it from inside that network or against a throwaway copy.
+The compose fragment is condensed from a production stack with names and paths generalized. The script reads only the `.docx` you name and writes only the PDF at `-OutPath`. The sidecar publishes no ports, so run it from inside that network or against a throwaway copy. Run against the pinned image with the fragment's memory limit and dropped capabilities, the script returned a valid PDF.
 
 ## Script
 
@@ -40,7 +40,7 @@ services:
     restart: unless-stopped
     environment:
       CONVERTER_URL: http://pdf-converter:3000   # remove this line and the app uses its own drawn PDF
-    networks: [pdf-internal]
+    networks: [default, pdf-internal]            # default is the app's normal route in and out; pdf-internal is shared with the converter only
     depends_on: [pdf-converter]                  # the converter starts with the app; if it is down or slow the app still answers
     read_only: true
     tmpfs: [/tmp]

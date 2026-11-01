@@ -43,7 +43,7 @@ Nothing here is intended to be a universal runbook. These are sanitized versions
 
 ### Cloud & self-hosting
 - [Self-hosted apps on a Synology NAS behind Cloudflare Tunnel, no inbound ports](cloud/cloudflare-tunnel-synology-docker.md)
-- [Pixel-faithful PDFs from Word files with a Gotenberg sidecar, internal network only](cloud/gotenberg-pdf-sidecar.md)
+- [Faithful PDFs from Word files with a Gotenberg sidecar, internal network only](cloud/gotenberg-pdf-sidecar.md)
 
 ## Read-only helpers
 
