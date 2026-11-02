@@ -4,25 +4,17 @@
 An externally organized meeting had been canceled, but a forwarded copy remained on internal calendars. A normal cancellation path was no longer reliable, and deleting calendar items tenant-wide based only on a subject line would have been too risky.
 
 ## Fix
-The working approach was deliberately split into two stages: first perform read-only discovery and export candidate events for review; then delete only rows explicitly approved. Before deletion, verify multiple event attributes rather than trusting a single field.
+The working approach was split into two stages: first perform read-only discovery and export candidate events for review; then delete only rows explicitly approved. Before deletion, verify multiple event attributes rather than trusting a single field.
 
 The matching model used the mailbox, organizer/sender, subject, start and end time, and the calendar/ICS identifier so that a similarly named legitimate meeting would not be removed accidentally.
 
-## Safety / Notes
-- Approval CSV separates discovery from destructive action.
-- `ShouldProcess` / `-WhatIf` support.
-- Re-reads the event immediately before deletion.
-- Refuses deletion if subject, organizer, time boundaries, or `iCalUId` no longer match the reviewed row.
-- Logs every delete, refusal, skip, and failure.
+The script supports `ShouldProcess` / `-WhatIf`, re-reads the event immediately before deletion, refuses deletion if the subject, organizer, time boundaries, or `iCalUId` no longer match the reviewed row, and logs every delete, refusal, skip, and failure.
 
 ## Result
-The historical workflow was first used for individual affected mailboxes and then safely expanded using the reviewed approval list.
-
-## Notes
-
-The original production code has been modified to run read-only for this public notebook.
+The workflow was first used for individual affected mailboxes and then safely expanded using the reviewed approval list.
 
 ## Script
+If you have a similar problem, here is a script you can try. The script is dry-run as published: it reports each change on screen and makes none. It asks for `Calendars.ReadWrite` at sign-in, even on a dry run.
 
 ```powershell
 [CmdletBinding(SupportsShouldProcess)]

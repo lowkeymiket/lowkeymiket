@@ -3,7 +3,7 @@
 ## Problem
 A FortiGate still contained monitoring/configuration references to a legacy Azure IPsec tunnel after the associated cloud/on-prem connectivity had been retired. The dashboard exposed the stale VPN object as an invalid interface, creating noise and leaving obsolete configuration in a production firewall.
 
-## Investigation
+## Approach
 Firewall monitoring showed the Azure tunnel in the IPsec section with an `Invalid interface` condition while the active Internet architecture had moved to normal WAN/SD-WAN connectivity. Before removing legacy VPN objects, dependencies such as routes and firewall policies had to be considered so cleanup would not break live traffic.
 
 ## Fix

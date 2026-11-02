@@ -6,9 +6,9 @@ The source employee directory and the Microsoft Teams Phone assignment state had
 
 Manually checking more than a hundred voice-enabled users across HR data and Teams administration was slow and error-prone.
 
-## Investigation
+## Approach
 
-The historical audit produced a merge log that classified records into categories such as:
+The audit produced a merge log that classified records into categories such as:
 
 - Filled blank
 - Updated existing value
@@ -17,37 +17,26 @@ The historical audit produced a merge log that classified records into categorie
 - User not found in Teams assignments
 - No phone in source
 
-The important design choice was to preserve the original and proposed values instead of silently overwriting contact data.
+The log kept the original and proposed values.
 
 ## Fix
 
-This public version accepts two CSV exports:
+The script accepts two CSV exports:
 
 1. The authoritative employee/source directory.
 2. The current Teams Phone assignment export.
 
-It normalizes phone numbers and display names, compares the two datasets, and generates a reconciliation report identifying matches, missing assignments, missing source values, and mismatches.
+It normalizes display names and phone numbers, including common North American phone formats, compares the two datasets, and generates a reconciliation report identifying matches, missing assignments, missing source values, and mismatches. Every non-matching record is flagged for review.
 
-The output includes a `SuggestedPhone` field, but the script deliberately performs **no live Teams mutations**.
-
-## Safety / Notes
-
-- Read-only against Microsoft 365.
-- Does not assign or remove phone numbers.
-- Preserves both source and Teams values for human review.
-- Normalizes common North American phone formats before comparing them.
-- Flags every non-matching record for review.
-- Separates data reconciliation from production change execution.
+The output includes a `SuggestedPhone` field. The script changes nothing in Teams.
 
 ## Result
 
-The historical workflow created a traceable merge log showing which users required corrections, which values were filled from the authoritative source, and which records already matched. This converted a messy telephony-data cleanup into a reviewable change set rather than a blind bulk update.
-
-## Notes
-
-The original production code is read-only by design; it only queries and reports.
+The audit's merge log showed which users required corrections, which values were filled from the authoritative source, and which records already matched. This converted a messy telephony-data cleanup into a reviewable change set.
 
 ## Script
+
+If you have a similar problem, here is a script you can try. It is read-only against Microsoft 365.
 
 ```powershell
 [CmdletBinding()]

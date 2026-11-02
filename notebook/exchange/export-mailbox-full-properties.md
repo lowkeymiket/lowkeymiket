@@ -6,17 +6,11 @@ A mailbox/object discrepancy needed deeper troubleshooting than the admin center
 ## Fix
 Connect to Exchange Online, retrieve the target mailbox, export every returned property to CSV, and print the full object for immediate inspection.
 
-## Investigation
-The historical session also demonstrated an important diagnostic distinction: first confirm the Exchange Online cmdlets are actually loaded, then determine whether the target resolves as an Exchange mailbox. A missing cmdlet and a missing Exchange recipient are different failures and should not be treated as the same problem.
-
-## Safety / Notes
-This is read-only. The public script takes the mailbox identity and destination path as parameters and performs no mutation.
-
-## Notes
-
-The original production code is read-only by design; it only queries and reports.
+## Gotchas
+First confirm the Exchange Online cmdlets are actually loaded, then determine whether the target resolves as an Exchange mailbox. A missing cmdlet and a missing Exchange recipient are different failures and should not be treated as the same problem.
 
 ## Script
+If you have a similar problem, here is a script you can try. It is read-only and takes the mailbox identity and destination path as parameters.
 
 ```powershell
 [CmdletBinding()]

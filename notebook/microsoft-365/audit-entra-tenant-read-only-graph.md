@@ -1,17 +1,17 @@
 # Audit an Entra ID Tenant Read-Only with Microsoft Graph
 
-## Problem
+## Task
 A tenant audit asks the same questions every time: users and guests, groups and their members, license seats, directory roles, app registrations and service principals, domains, conditional access, recent sign-ins. The admin center answers one blade at a time and exports little. The account doing the looking is an administrator's, so the audit has to be unable to change what it audits.
 
-## Investigation
-Unlike the [OneNote notebook inventory](../sharepoint/inventory-onenote-notebooks-graph.md), this work is interactive and needs directory and policy data, so it uses a delegated sign-in rather than an app-only certificate. Requesting only `*.Read.All` scopes looked sufficient. It is not: delegated consent for the Graph command-line client accumulates per user, and every new token carries the union of everything ever granted. In the tenant this came from, the token still held write permissions from earlier work.
+## Approach
+This work is interactive and needs directory and policy data, so it uses a delegated sign-in. Requesting only `*.Read.All` scopes looked sufficient. It is not: delegated consent for the Graph command-line client accumulates per user, and every new token carries the union of everything ever granted. In the tenant this came from, the token still held write permissions from earlier work.
 
-## Fix
+## Solution
 One script, three layers:
 
-1. `Connect-ReadOnlyGraph` requests read scopes only and throws on any scope that is not `*.Read*`. It cannot remove old consent, so it warns about any write scope the token carries.
+1. `Connect-ReadOnlyGraph` requests read scopes only and throws on any scope that is not `*.Read*`. It cannot remove old consent, so it warns about any write scope the token carries. It also stops if the signed-in tenant differs from `-TenantId`, which has no default, because a cached sign-in restores whichever account was used last.
 2. `Invoke-GraphGet` is the only caller of `Invoke-MgGraphRequest` and throws on any method but GET. `Get-GraphCollection` pages through it.
-3. The operator's rule: a change is stated exactly and confirmed twice in conversation, then made by a separate tool.
+3. The operator's rule: a change is stated exactly and confirmed twice, then made by a separate tool.
 
 Thirteen commands, from `me` to `signins`, return flat rows ready for `-OutCsv`.
 
@@ -21,20 +21,14 @@ Thirteen commands, from `me` to `signins`, return flat rows ready for `-OutCsv`.
 - **Guest filters are advanced queries.** `userType eq 'Guest'` fails without `ConsistencyLevel: eventual` and `$count=true`, and the header must go out with every page.
 - **Version 1.0 conditional access is incomplete.** It omits policies that use preview features; one tenant showed about two thirds of them. The script reads the beta endpoint.
 - **`-Top` is one page.** Following `nextLink` would walk the whole sign-in log. Sign-ins also need Entra ID P1, or Graph answers HTTP 403.
-
-## Safety / Notes
-- Delegated `*.Read.All` scopes only. `-TenantId` has no default, and the script stops if the signed-in tenant differs, because a cached sign-in restores whichever account was used last.
-- The GET gate is a guard rail, not a permission boundary. With write consent on the token, only the gate and the operator's rule stand between a script and a change. Revoking the old consent is the real fix, and it needs both confirmations.
-- Results include names and sign-in details; treat the CSV files as sensitive.
+- **The GET gate is a guard rail, not a permission boundary.** With write consent on the token, only the gate and the operator's rule stand between a script and a change. Revoking the old consent closes that gap.
 
 ## Result
-Each command returns flat objects, one per row, and every page of a large collection is followed, so exports are complete and comparable between audits. The role audit is the slow one, a member request per role, at about a minute. Every request is a GET, and leftover write consent shows up as a warning at sign-in instead of a surprise later. Most of the directory was guest accounts, which is why guests have their own command.
-
-## Notes
-
-The original production driver is read-only by design; it only queries and reports. It also had an override for a confirmed change; the published script drops it, leaving no write path.
+Each command returns flat objects, one per row, and every page of a large collection is followed, so exports are complete and comparable between audits. The role audit is the slow one, a member request per role, at about a minute. Every request is a GET, and leftover write consent shows up as a warning at sign-in. Most of the directory was guest accounts, which is why guests have their own command.
 
 ## Script
+
+If you have a similar task, here is a script you can try. The script has no write path. Results include names and sign-in details, so treat the CSV files as sensitive.
 
 ```powershell
 #Requires -Version 7.0
