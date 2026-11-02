@@ -44,6 +44,7 @@ Nothing here is intended to be a universal runbook. These are sanitized versions
 ### Cloud & self-hosting
 - [Self-hosted apps on a Synology NAS behind Cloudflare Tunnel, no inbound ports](cloud/cloudflare-tunnel-synology-docker.md)
 - [Faithful PDFs from Word files with a Gotenberg sidecar, internal network only](cloud/gotenberg-pdf-sidecar.md)
+- [Self-hosted GitHub Actions runners in WSL on a build and test server, with a memory cap and a keep-alive](cloud/self-hosted-github-runners-wsl.md)
 
 ## Read-only helpers
 
