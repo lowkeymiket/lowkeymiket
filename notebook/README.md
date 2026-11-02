@@ -2,7 +2,7 @@
 
 Scripts, configurations, and troubleshooting notes from problems I have run into while administering Microsoft 365, Entra ID, SharePoint, Windows endpoints, mail flow, and network infrastructure.
 
-Nothing here is intended to be a universal runbook. These are sanitized versions of fixes that were useful in a specific environment. Review the assumptions and test them before using anything in production.
+These are fixes that were useful in one environment. There's always more than one way to solve these, so if you've got a better one, open an issue. I'd love to hear it. Review the assumptions and test anything here before using it in production.
 
 ## Folders
 
@@ -14,7 +14,7 @@ Nothing here is intended to be a universal runbook. These are sanitized versions
 - [Entra join and MDM state validation](microsoft-365/validate-entra-mdm-state.md)
 - [Read-only Entra ID tenant audit through delegated Graph](microsoft-365/audit-entra-tenant-read-only-graph.md)
 - [Bulk employee ID updates in Entra ID](microsoft-365/update-entra-employee-id.md)
-- [Safe B2B guest removal](microsoft-365/remove-b2b-guests-safely.md)
+- [B2B guest removal](microsoft-365/remove-b2b-guests-safely.md)
 - [License migration between SKUs with add-before-remove validation](microsoft-365/migrate-license-atomic.md)
 - [Entra group membership export through Graph](microsoft-365/export-entra-group-members.md) (read-only helper)
 
@@ -54,16 +54,16 @@ Smaller read-only helpers that are useful during troubleshooting but do not need
 
 Entries are kept short and generally follow:
 
-1. **Problem**
-2. **Investigation**, when diagnosis matters
-3. **Fix**
-4. **Safety / Notes**, when there are meaningful safeguards or caveats
-5. **Result**
+1. **Problem or task**
+2. **Approach**, when there was diagnosis or testing
+3. **Fix** or **Solution**
+4. **Result**
+5. **Script**
 
-Some fixes are configuration-only. I have not added fake scripts just to make those entries look more substantial.
+Some fixes are configuration-only.
 
 ## Sanitization
 
 Domains, employee identities, tenant/application IDs, internal paths, IP addresses, and customer data are removed or parameterized where needed. The scripts are sanitized, generalized versions of the production fixes.
 
-Scripts that make changes are additionally published in read-only mode: a forced dry-run or an execution guard prevents them from modifying anything as published. Each affected entry carries a publication note.
+Scripts that make changes are additionally published in read-only mode: a forced dry-run or an execution guard prevents them from modifying anything as published. Each affected entry says how its script is limited.

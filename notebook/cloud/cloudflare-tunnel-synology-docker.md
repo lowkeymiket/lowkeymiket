@@ -1,16 +1,15 @@
 # Publish Self-Hosted Apps from a Synology NAS with Cloudflare Tunnel
 
-## Problem
-Several small web apps run in Docker on a two-bay Synology NAS at home and had to be reachable from anywhere. The usual answer, a router port forward with dynamic DNS and a certificate, puts the NAS on the internet. The goal: no inbound ports, a sign-in in front of every app, and tunnel software that stays current on its own.
+## Task
+Several small web apps run in Docker on a Synology NAS and had to be reachable from anywhere. The goal: no inbound ports, a sign-in in front of every app, and tunnel software that stays current on its own.
 
-## Investigation
-Cloudflare Tunnel inverts the connection. A connector, `cloudflared`, dials out to Cloudflare and requests come back through it, so the router needs no port forward and the NAS no inbound rule. One shared tunnel would be one failure point, so each stack carries its own sidecar on its own Compose network. A tunnel route alone is public, so every hostname also gets a Cloudflare Access application.
+## Solution
+`cloudflared` dials out to Cloudflare and requests come back through it, so the router needs no port forward and the NAS no inbound rule. Each stack carries its own sidecar on its own Compose network. A tunnel route alone is public, so every hostname also gets a Cloudflare Access application.
 
-## Fix
 1. Create a remotely managed tunnel in the Cloudflare dashboard (the domain must use Cloudflare DNS) and copy its token.
-2. Put `TUNNEL_TOKEN=...` alone in `cloudflared.env`, mode 600, outside git.
+2. Put `TUNNEL_TOKEN=...` alone in `cloudflared.env`, mode 600, outside git. The token is the tunnel, and `compose config` resolves env files, so keep its output out of logs.
 3. Add the sidecar (first block). Point `app.example.com` at `http://app:8080`, the Compose service name, and delete any host port mapping.
-4. Create the Access application before the route: one identity provider (Microsoft Entra ID), an Allow policy for one email address, 24-hour sessions. Anything matching no policy is denied.
+4. Create the Access application before the route: one identity provider (Microsoft Entra ID), an Allow policy for one email address, 24-hour sessions. Anything matching no policy is denied. Keep the policy narrow: never "Everyone".
 5. Schedule the second block in DSM Task Scheduler as root on Sundays. It finds each running `cloudflared` container by its Compose label, skips stacks that pin a version, then runs `pull` and `up -d --no-deps cloudflared`. If the tunnel does not log "Registered tunnel connection" within two minutes, it exits 1 and DSM sends mail.
 
 ## Gotchas
@@ -19,19 +18,11 @@ Cloudflare Tunnel inverts the connection. A connector, `cloudflared`, dials out 
 - **Warnings are not failures.** The log may complain about the UDP receive buffer and the ICMP proxy. Trust `cloudflared tunnel ready`.
 - **Tokens.** Without one the service just restart-loops. A pinned version can read it from a Docker secret with `--token-file`, which needs cloudflared 2025.4.0 or later.
 
-## Safety / Notes
-- The token is the tunnel: mode 600, out of git and logs. The script never prints `compose config`, which resolves env files.
-- Access is the lock and the tunnel is only the pipe. Keep the policy narrow: one email, never "Everyone", and never a route without its Access application.
-- `:latest` trades reproducibility for currency. A stack that must not move pins a version, and the weekly task leaves it alone.
-
 ## Result
-Three stacks publish through their own tunnels with zero inbound ports on the router or the NAS, and every hostname asks for a sign-in first. The weekly refresh takes under a minute when a release is out and does nothing otherwise; a tunnel that fails to return produces an email, not a surprise.
-
-## Notes
-
-The original production code has been modified to run read-only for this public notebook: the script lists what it would refresh and changes nothing until `DRY_RUN` is set to `0`.
+Three stacks publish through their own tunnels with zero inbound ports on the router or the NAS, and every hostname asks for a sign-in first. The weekly refresh takes under a minute when a release is out and does nothing otherwise. A tunnel that fails to return produces an email.
 
 ## Script
+If you have a similar task, here is a script you can try. The script is dry-run by default: it lists what it would refresh and changes nothing until `DRY_RUN` is set to `0`.
 
 ```yaml
 # compose.yaml: an app and its Cloudflare Tunnel sidecar. No ports are published.

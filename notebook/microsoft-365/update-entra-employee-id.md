@@ -1,26 +1,17 @@
 # Bulk Entra Employee ID Update
 
-## Problem
+## Task
 Employee IDs needed to be populated or corrected in Entra ID in bulk from a reviewed CSV rather than edited manually one user at a time. The process also had to avoid changing users whose attributes were mastered by on-premises Active Directory.
 
-## Fix
-A Microsoft Graph PowerShell script imports a CSV, validates each row, looks up the user, checks whether the account is directory-synchronized, and updates `employeeId` only for cloud-managed users.
-
-## Safety / Notes
-- `-DryRun` mode records what would change without modifying Entra ID.
-- Missing UPN or employee ID rows are skipped and logged.
-- Employee IDs longer than the supported length are rejected.
-- Synced users are explicitly skipped so the source directory remains authoritative.
-- Every user receives a structured result row with status and notes.
+## Solution
+A Microsoft Graph PowerShell script imports a CSV, validates each row, looks up the user, checks whether the account is directory-synchronized, and updates `employeeId` only for cloud-managed users. Rows missing a UPN or employee ID are skipped and logged, and employee IDs longer than the supported length are rejected. Synced users are explicitly skipped so the source directory remains authoritative. `-DryRun` mode records what would change without modifying Entra ID, and every user receives a structured result row with status and notes.
 
 ## Result
 The workflow turned a repetitive directory-maintenance task into a reviewable bulk operation with an audit CSV and clear handling for exceptions.
 
-## Notes
-
-The original production code has been modified to run read-only for this public notebook.
-
 ## Script
+
+If you have a similar task, here is a script you can try. The script is dry-run as published: it reports each employee ID change and makes none. It asks for `User.ReadWrite.All` at sign-in, even on a dry run.
 
 ```powershell
 param(

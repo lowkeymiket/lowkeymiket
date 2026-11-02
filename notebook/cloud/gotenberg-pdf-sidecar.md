@@ -3,14 +3,13 @@
 ## Problem
 An app builds a tailored resume as a Word file, and the PDF made from it goes to employers, so PDF fidelity is what the reader sees. The app's own drawn PDF was an approximation. Beside the Word rendering it came out in a serif font instead of Roboto, lost the heading color and every bold line, and ran three pages instead of two.
 
-## Investigation
-No pure JavaScript library lays out Word documents faithfully, and a headless browser costs more RAM for a worse result. That left LibreOffice in a sidecar. Gotenberg's LibreOffice-only image wraps it in an HTTP API (`POST /forms/libreoffice/convert`, multipart field `files`) and handles supervision, timeouts and recycling. The image is pinned at `8.37.0-libreoffice`, about 443 MB compressed. Its Carlito, Caladea and Liberation fonts stand in for Calibri, Cambria, Arial and Times with identical widths, so line and page breaks match Word.
-
 ## Fix
-1. Add the sidecar on an `internal: true` network shared only with the app, with no published ports.
-2. Use `--libreoffice-auto-start=false` to start LibreOffice on first use, `--libreoffice-restart-after=10` to bound memory growth, and a 768 MB limit.
+Gotenberg's LibreOffice-only image wraps LibreOffice in an HTTP API (`POST /forms/libreoffice/convert`, multipart field `files`) and handles supervision, timeouts and recycling. The image is pinned at `8.37.0-libreoffice`, about 443 MB compressed. Its Carlito, Caladea and Liberation fonts stand in for Calibri, Cambria, Arial and Times with identical widths, so line and page breaks match Word.
+
+1. Add the sidecar on an `internal: true` network shared only with the app, with no published ports. It has no authentication and runs documents through LibreOffice, so never expose it publicly.
+2. Use `--libreoffice-auto-start=false` to start LibreOffice on first use, `--libreoffice-restart-after=10` to bound memory growth, and a 768 MB limit. Hardening: `no-new-privileges`, no capabilities, read-only fonts.
 3. Mount a folder of Roboto, Carlito and Liberation files read-only under `/usr/share/fonts`. Verify with `docker compose exec pdf-converter fc-match Roboto`.
-4. Give the app `CONVERTER_URL`. It POSTs the exact `.docx` it built and stores the PDF that comes back.
+4. Give the app `CONVERTER_URL`. It POSTs the exact `.docx` it built and stores the PDF that comes back. The app distrusts the reply: no redirects, 10 MB in, 20 MB out, and the body must start with `%PDF-`.
 5. Keep the drawn PDF as the fallback. A timeout (20 seconds by default), network error, non-200 answer, oversize file or non-PDF body raises an error. The caller uses the drawn PDF, labels it an approximation and adds a render note.
 
 ## Gotchas
@@ -18,19 +17,11 @@ No pure JavaScript library lays out Word documents faithfully, and a headless br
 - **Calibri and Cambria are not in the image.** Their stand-ins match widths, not every letterform. A font with no metric twin shifts page breaks.
 - **Name the upload `.docx`.** LibreOffice picks its importer by extension.
 
-## Safety / Notes
-- It has no authentication and runs documents through LibreOffice, so never expose it publicly. Here it publishes no ports and sits on an `internal: true` network that only the app joins.
-- Hardening: `no-new-privileges`, no capabilities, read-only fonts.
-- The app distrusts the reply: no redirects, 10 MB in, 20 MB out, and the body must start with `%PDF-`.
-
 ## Result
-On a small two-bay NAS the container used about 6 MB idle and about 100 MB after a conversion, against its 768 MB limit, and a first conversion took about 2 seconds cold. A Word-built resume converts to two pages in Roboto, matching the Word rendering. A converter that is down, slow or wrong costs fidelity, never availability.
-
-## Notes
-
-The compose fragment is condensed from a production stack with names and paths generalized. The script reads only the `.docx` you name and writes only the PDF at `-OutPath`. The sidecar publishes no ports, so run it from inside that network or against a throwaway copy. Run against the pinned image with the fragment's memory limit and dropped capabilities, the script returned a valid PDF.
+On a NAS the container used about 6 MB idle and about 100 MB after a conversion, against its 768 MB limit, and a first conversion took about 2 seconds cold. A Word-built resume converts to two pages in Roboto, matching the Word rendering. A converter that is down, slow or wrong costs fidelity, never availability.
 
 ## Script
+If you have a similar problem, here is a script you can try. The script reads only the `.docx` you name and writes only the PDF at `-OutPath`. The sidecar publishes no ports, so run it from inside that network or against a throwaway copy.
 
 ```yaml
 # compose.yaml: an app and a Gotenberg (LibreOffice) PDF converter sidecar. No ports are published.

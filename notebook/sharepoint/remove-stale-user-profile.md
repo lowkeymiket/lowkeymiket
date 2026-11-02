@@ -4,22 +4,14 @@
 A rehired employee had a current Entra ID account, but SharePoint still retained the legacy identity from the employee's previous account. The stale entry appeared as an inactive user and could trigger duplicate-account behavior because the legacy and current identities shared the same email address.
 
 ## Fix
-A PnP PowerShell workflow connects to each affected SharePoint or OneDrive site, removes the stale membership identity, then queries the site's User Information List to verify that the legacy entry is gone.
-
-## Safety / Notes
-- Operates only against a reviewed list of affected sites.
-- Targets the exact SharePoint membership login rather than a fuzzy display-name match.
-- Performs a post-removal verification query.
-- Records a result for every site, including failures, instead of silently continuing.
+A PnP PowerShell workflow connects to each affected SharePoint or OneDrive site, removes the stale membership identity, then queries the site's User Information List to verify that the legacy entry is gone. It operates only against a reviewed list of affected sites, targets the exact SharePoint membership login instead of a display name, and records a result for every site, including failures.
 
 ## Result
 The stale identity was removed from affected sites while the active Entra account remained intact, resolving the legacy-account conflict.
 
-## Notes
-
-The original production code has been modified to run read-only for this public notebook.
-
 ## Script
+
+If you have a similar problem, here is a script you can try. As published, a read-only guard stops the script before it makes any change.
 
 ```powershell
 param(

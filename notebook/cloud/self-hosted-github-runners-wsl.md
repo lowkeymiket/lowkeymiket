@@ -1,14 +1,16 @@
 # Run Self-Hosted GitHub Actions Runners on Windows with WSL
 
-## Setup
+## What it is
 Three self-hosted GitHub Actions runners, one per private repository, run as systemd services in WSL 2 on our build and test server. Each runner polls GitHub over outbound HTTPS, so it needs no inbound ports, and takes one job at a time.
 
-## WSL
+## How it works
+
+### WSL
 - **Systemd.** Enabled in `/etc/wsl.conf`, so each runner is an ordinary service, in its own folder under `/opt`, under an unprivileged Linux user with no sudo.
 - **Staying up.** WSL stops its VM when nothing is attached, and the runners stop with it. A user-level scheduled task (third block) holds `sleep infinity` in the distro as the runner user, at logon and every 5 minutes, through a headless console host.
 - **Memory.** `%UserProfile%\.wslconfig` (first block) caps the VM at 14 GB, about half of what Windows sees, with 8 GB of swap so a heavy job slows down instead of being killed. `autoMemoryReclaim` returns idle page cache to Windows and `sparseVhd` returns freed disk. A fixed 40 GB page file sits on a second disk.
 
-## Runners
+### Runners
 - **Picking the runner.** A repository variable (second block) holds the runner label, so switching needs no workflow edit. Unset, the job runs on a hosted runner.
 - **Forks and Dependabot.** The `runs-on` expression keeps those pull requests on hosted runners, so they never reach this machine.
 - **Private repositories only, as GitHub advises.** A pull request from a fork of a public repository can run code on the machine.
@@ -22,11 +24,8 @@ Three self-hosted GitHub Actions runners, one per private repository, run as sys
 - **The Docker daemon outlives the job.** Clear leftover containers on fixed ports first and remove images in an `if: always()` step.
 - **Memory runs out in combination.** A test gate, a concurrent Docker image build, orphaned Vite dev servers and unreturned page cache can exhaust the machine together, so run one heavy WSL job at a time.
 
-## Notes
-
-The script is dry-run by default: nothing is registered until `-Execute` is passed.
-
 ## Script
+If you have a similar task, here is a script you can try. The script is dry-run by default: nothing is registered until `-Execute` is passed.
 
 ```ini
 # %UserProfile%\.wslconfig. Applies after `wsl --shutdown`.

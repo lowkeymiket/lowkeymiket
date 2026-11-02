@@ -1,13 +1,13 @@
 # Inventory Every OneNote Notebook in a Tenant with Microsoft Graph
 
-## Problem
+## Task
 A migration was going to change every SharePoint and OneDrive URL in the organization, so every OneNote notebook had to be accounted for first: where it lived, who created it, and whether anyone still used it. No admin center lists notebooks. In a document library a notebook is just a folder of `.one` section files with a `.onetoc2` table of contents.
 
-## Investigation
-The per-user OneNote API route had already shown its limits ([Tenant-Wide OneNote Inventory](onenote-tenant-inventory.md)). A delegated admin session was no better: `sites/getAllSites` needs an application permission and returned 403, so that crawl saw fewer than half of the sites. The working approach reads the files instead, through app-only Graph with a certificate: unattended, and with a permission that cannot write.
+## Approach
+The per-user OneNote API route had already shown its limits ([Tenant-Wide OneNote Inventory](onenote-tenant-inventory.md)). A delegated admin session was no better: `sites/getAllSites` needs an application permission and returned 403, so that crawl saw fewer than half of the sites. The working approach reads the files instead, through app-only Graph with a certificate.
 
-## Fix
-The public script follows the production crawler:
+## Solution
+The crawler works in five steps:
 
 1. `sites/getAllSites` lists every site, including personal OneDrives. Team sites are walked first.
 2. Per drive, `root/search(q='onetoc2')` finds the table-of-contents files in a request or two instead of walking every folder.
@@ -15,25 +15,20 @@ The public script follows the production crawler:
 4. One children listing per notebook counts sections. Last activity is the newest `lastModifiedDateTime` of the folder and its sections.
 5. A site is marked done in a JSONL state file only after its rows are written. Each pass stops starting new sites after eight minutes; a final `-RetryErrors` pass re-walks the sites that failed.
 
+Every request goes through one function with `-Method GET` hard-coded and is logged to `requests.log`. The script is safe to run twice: walked sites are skipped, and an interrupted pass redoes at most one site.
+
 ## Gotchas
 - **`Connect-Graph` is an alias.** The Graph authentication module exports it for `Connect-MgGraph`, and an alias beats a function of the same name. A helper called `Connect-Graph` silently never ran, so its settings were never applied.
 - **Hidden SDK retries.** The SDK's default `MaxRetry` of 3 retries each 429 itself (3, 6 and 12 seconds), then throws "Too many retries performed" with status 0: a 21-second stall the script cannot see. `Set-MgRequestContext -MaxRetry 0` surfaces the 429 in under a second, so the script's own back-off runs.
 - **A disabled account locks its OneDrive.** When a user's account is disabled at offboarding, SharePoint puts their OneDrive into a locked state and every app-only call to it returns HTTP 423. The notebooks are still there; the crawler cannot read them until the site is unlocked, so they are reported as a known gap rather than silently dropped.
-
-## Safety / Notes
-- Application permission `Sites.Read.All` with a certificate; no secret in the script.
-- Every request goes through one function with `-Method GET` hard-coded and is logged to `requests.log`.
-- Safe to run twice: walked sites are skipped, and an interrupted pass redoes at most one site.
-- Search follows the index, so a brand-new notebook can be missed. A 404 while climbing is a stale index entry, not an error.
+- **Search follows the index.** A brand-new notebook can be missed. A 404 while climbing is a stale index entry, not an error.
 
 ## Result
-The crawl covered about a thousand sites and found about a thousand notebooks in a handful of eight-minute passes and a few thousand requests, all of them GETs. Nearly nine in ten notebooks lived in personal OneDrives, not team sites. Roughly a third had been active in the last year, which turned "every notebook" into a list short enough to review with owners. Several dozen locked OneDrives, all belonging to disabled accounts, were reported as a known gap instead of vanishing from the totals.
-
-## Notes
-
-The original production code is read-only by design; it only queries and reports.
+The crawl covered about a thousand sites and found about a thousand notebooks in a handful of eight-minute passes and a few thousand requests, all of them GETs. Nearly nine in ten notebooks lived in personal OneDrives, not team sites, and roughly a third had been active in the last year, which turned "every notebook" into a list short enough to review with owners. Several dozen locked OneDrives, all belonging to disabled accounts, were reported as a known gap instead of vanishing from the totals.
 
 ## Script
+
+If you have a similar task, here is a script you can try. It needs the application permission `Sites.Read.All` with a certificate.
 
 ```powershell
 #Requires -Version 7.0

@@ -1,31 +1,19 @@
 # Distribution List Last-Used Audit
 
-## Problem
+## Task
 The tenant had accumulated a large number of distribution lists and the business needed a defensible way to decide which could be retired. Creation date and membership did not answer the important question: had the address actually received mail recently?
 
-## Investigation
-The historical workflow enumerated Exchange Online distribution groups and queried `Get-MessageTraceV2` for each address. The production run progressed through named lists and then repeatedly hit Exchange Online's "recent queries have surpassed the permitted limit" response. That failure became part of the design problem, not just an incidental error.
+## Approach
+The workflow enumerated Exchange Online distribution groups and queried `Get-MessageTraceV2` for each address. The production run progressed through named lists and then repeatedly hit Exchange Online's "recent queries have surpassed the permitted limit" response.
 
-## Fix
-This public version enumerates distribution groups, applies configurable naming exclusions, breaks the lookback period into smaller trace windows, retries likely throttling responses with exponential backoff, records the newest observed message date, and exports a review CSV with a blank `ReviewDecision` column.
-
-## Safety / Notes
-- Read-only discovery. The script never deletes groups.
-- Configurable naming exclusions protect known classes of lists from review.
-- Human approval is separated from discovery through the exported `ReviewDecision` field.
-- Date-range chunking reduces query size.
-- Exponential retry/backoff handles Exchange Online trace throttling more gracefully.
-- Per-group errors are recorded without aborting the entire tenant audit.
-- The script records both the latest observed message and the number of messages returned during the audit window.
+## Solution
+The script enumerates distribution groups, applies configurable naming exclusions that protect known classes of lists from review, breaks the lookback period into smaller trace windows, retries likely throttling responses with exponential backoff, records the newest observed message date and the number of messages returned during the audit window, and exports a review CSV with a blank `ReviewDecision` column, which keeps human approval separate from discovery. Per-group errors are recorded without aborting the entire tenant audit.
 
 ## Result
-The historical run produced the basis for a Keep/Delete business review and exposed a real tenant-scale constraint: a straightforward loop of `Get-MessageTraceV2` calls can exceed service query limits. The hardened public version incorporates that lesson directly.
-
-## Notes
-
-The original production code is read-only by design; it only queries and reports.
+The run produced the basis for a Keep/Delete business review and exposed a real tenant-scale constraint: a straightforward loop of `Get-MessageTraceV2` calls can exceed service query limits. The script's date-range chunking and backoff come from that lesson.
 
 ## Script
+If you have a similar task, here is a script you can try. It is read-only discovery and never deletes groups.
 
 ```powershell
 <#

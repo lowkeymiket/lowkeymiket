@@ -1,25 +1,14 @@
-# Safe Entra B2B Guest Removal
+# Entra B2B Guest Removal
 
-## Problem
+## Task
 Administrators needed a repeatable way to remove external B2B guest accounts without risking deletion of normal member accounts or unrelated identities.
 
-## Fix
-The script resolves candidate users through Microsoft Graph and applies multiple identity checks before deletion.
-
-## Safety / Notes
-- Requires the Entra object to be a `Guest`.
-- Requires the expected B2B `#EXT#` UPN pattern.
-- Supports preview/review before destructive action.
-- Logs skipped and deleted objects separately.
-
-## Result
-The workflow provides a safer template for bulk guest cleanup than directly piping search results into `Remove-MgUser`.
-
-## Notes
-
-The original production code has been modified to run read-only for this public notebook.
+## Solution
+The script resolves candidate users through Microsoft Graph and applies multiple identity checks before deletion. It requires the Entra object to be a `Guest` and its UPN to match the expected B2B `#EXT#` pattern. It supports preview and review before destructive action, and it logs skipped and deleted objects separately.
 
 ## Script
+
+If you have a similar task, here is a script you can try. The script is dry-run as published: it reports each change and makes none. It asks for `User.ReadWrite.All` at sign-in, even on a dry run.
 
 ```powershell
 <# Public version. Deliberately requires both Guest userType and #EXT# UPN marker. #>
