@@ -14,7 +14,7 @@ The public version searches both 32-bit and 64-bit uninstall registry paths, acc
 - Final verification treats still-installed targets as a failure instead of assuming the uninstall command succeeded.
 
 ## Result
-In production the migration agent was removed successfully, ShareFile was removed after iterative testing, and final verification correctly identified software that remained installed.
+In production the migration agent was removed successfully. ShareFile was installed in different versions across the fleet, so the script was adjusted to uninstall all of them. Final verification correctly identified software that remained installed.
 
 ## Script
 If you have a similar task, here is a script you can try. The script is read-only by default: `$WhatIfPreference` is forced on, so uninstalls are simulated.

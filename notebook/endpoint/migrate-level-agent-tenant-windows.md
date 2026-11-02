@@ -8,7 +8,7 @@ The wrapper writes the migration script to disk through the RMM terminal, then l
 
 1. Stop and disable Level services and processes.
 2. Run the vendor uninstall when `level.exe` is present.
-3. Find any remaining Level MSI product codes by decoding the packed (byte-reversed) GUIDs under `HKLM:\SOFTWARE\Classes\Installer\Products` and remove them with `msiexec /x`. This covers installs whose uninstall registry string was blank.
+3. Find any remaining Level MSI product codes by decoding the packed GUIDs under `HKLM:\SOFTWARE\Classes\Installer\Products` and remove them with `msiexec /x`. This covers installs whose uninstall registry string was blank.
 4. Remove leftover identity/config folders. This step is critical for a tenant swap: a stale agent identity re-enrolls the device into the old tenant.
 5. Download the MSI and install silently with the new tenant's `LEVEL_API_KEY` property. Each device group received its key at run time.
 6. Re-enable and start the services.
@@ -58,11 +58,11 @@ function Stop-Level {
 function Convert-PackedGuidToGuid([string]$packed) {
   if (-not $packed -or $packed.Length -ne 32) { return $null }
 
-  function SwapPairs($s) { ($s -split '(.{2})' | Where-Object { $_ })[-1..0] -join '' }
+  function ReverseChars($s) { $chars = $s.ToCharArray(); [array]::Reverse($chars); -join $chars }
 
-  $a = SwapPairs($packed.Substring(0,8))
-  $b = SwapPairs($packed.Substring(8,4))
-  $c = SwapPairs($packed.Substring(12,4))
+  $a = ReverseChars($packed.Substring(0,8))
+  $b = ReverseChars($packed.Substring(8,4))
+  $c = ReverseChars($packed.Substring(12,4))
 
   function NibbleSwapPairs($s) {
     $out = ""
