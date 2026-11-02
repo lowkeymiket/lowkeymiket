@@ -10,11 +10,11 @@ The audit attempted discovery across hundreds of users and SharePoint locations.
 The audit was designed as a fault-tolerant discovery job. It enumerates targets, queries the OneNote Graph endpoints, records notebooks that can be resolved, and writes failures to a separate error report so one inaccessible account or site does not stop the tenant-wide run. The notebook, summary, and error exports are separate, and partial results are preserved when Graph cannot enumerate every location.
 
 ## Result
-The production run discovered **229 notebooks**, resolved **128 packages**, left **101 unresolved**, and recorded **541 errors** while still completing and producing notebook, progress, error, and transcript outputs. The errors documented the boundaries of Graph/OneNote visibility across the tenant.
+The production run discovered about 230 notebooks, resolved about 130 packages, left about 100 unresolved, and recorded about 540 errors while still completing and producing notebook, progress, error, and transcript outputs. The errors documented the boundaries of Graph/OneNote visibility across the tenant.
 
 ## Script
 
-If you have a similar task, here is a script you can try. It uses read-only Graph permissions and does not delete, relocate, or modify notebook content.
+If you have a similar task, here is a script you can try. It uses read-only Graph permissions and does not delete, relocate, or modify notebook content. It walks users only, so it reports users scanned, notebooks and errors, not the package counts above. For notebooks in SharePoint sites, see [Inventory Every OneNote Notebook in a Tenant with Microsoft Graph](inventory-onenote-notebooks-graph.md).
 
 ```powershell
 <#
